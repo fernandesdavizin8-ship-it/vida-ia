@@ -581,18 +581,19 @@ function sendMessage() {
 
     setTimeout(async () => {
         // Agora a IA é proativa: se detectar comandos, nomes de base (vRP/Creative) ou se for uma frase de pedido, ela gera o script.
-        const isRequest = lowerText.includes('criar') || lowerText.includes('faz') || lowerText.includes('script') || 
+        const isRequest = currentMode === 'create' || currentMode === 'fix' || 
+                         lowerText.includes('criar') || lowerText.includes('faz') || lowerText.includes('script') || 
                          lowerText.includes('sistema') || lowerText.includes('/') || lowerText.includes('vrp') || 
                          lowerText.includes('creative') || lowerText.includes('comando') || lowerText.includes('erro') ||
                          lowerText.includes('bug') || lowerText.includes('corrigir');
 
         if (isRequest) {
-        if (!directoryHandle) {
-            addMessage('ai', "❌ Erro: Nenhuma pasta conectada! Para que a Vida IA injete o script direto no seu servidor igual à Kiro, você precisa clicar no botão 'Conectar Pasta (Kiro)' na barra lateral primeiro.");
-            return;
-        }
+            // Se for pedido de script mas não tiver pasta conectada, avisa mas permite gerar no painel lateral
+            if (!directoryHandle && !lowerText.includes('conectar')) {
+                addMessage('ai', "⚠️ **Nota:** Você ainda não conectou sua pasta via 'Conectar Pasta (Kiro)'. Eu vou gerar o código no seu **Painel Lateral de Arquivos**, mas recomendo conectar a pasta para eu injetar o script direto no seu servidor.");
+            }
 
-        const isBugFix = lowerText.includes('corrigir') || lowerText.includes('erro') || lowerText.includes('bug');
+            const isBugFix = currentMode === 'fix' || lowerText.includes('corrigir') || lowerText.includes('erro') || lowerText.includes('bug');
             
             addMessage('ai', isBugFix ? "🔍 Analisando falhas e corrigindo código..." : "🚀 Vida IA Processando... Gerando seu script FiveM de alta performance.");
             
