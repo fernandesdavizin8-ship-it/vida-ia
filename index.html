@@ -84,6 +84,17 @@
                         </ul>
                         <button onclick="buyPlan('Prata', 59.90, 150)">Selecionar Plano</button>
                     </div>
+                    <div class="plan-card" style="border: 2px solid #fbbf24; position: relative;">
+                        <div class="plan-badge" style="background: #fbbf24; color: #000;">NOVO: VIP + CURSO</div>
+                        <h3>Plano VIP</h3>
+                        <p class="price">R$ 50,00</p>
+                        <ul class="plan-features">
+                            <li><i class="fas fa-check"></i> 100 Créditos</li>
+                            <li><i class="fas fa-graduation-cap" style="color: #fbbf24;"></i> <b>Curso: Como Programar Cidade</b></li>
+                            <li><i class="fas fa-check"></i> Suporte Prioritário</li>
+                        </ul>
+                        <button style="background: #fbbf24; color: #000;" onclick="buyPlan('VIP', 50.00, 100)">Comprar VIP</button>
+                    </div>
                     <div class="plan-card">
                         <div class="plan-badge purple">ENTERPRISE</div>
                         <h3>Plano Ouro</h3>
@@ -139,6 +150,32 @@
                     <input type="email" id="admin-target-email" placeholder="E-mail do Cliente">
                     <input type="number" id="admin-amount" placeholder="Quantidade de Créditos">
                     <button class="admin-btn" onclick="releaseCredits()">Liberar Créditos Agora</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="course-modal" class="modal">
+            <div class="modal-content" style="max-width: 800px;">
+                <span class="close" onclick="closeCourseModal()">&times;</span>
+                <h2 style="color: #fbbf24;"><i class="fas fa-graduation-cap"></i> Curso: Como Programar sua Cidade FiveM</h2>
+                <p style="color: #94a3b8; margin-bottom: 20px;">Parabéns por se tornar VIP! Aqui está o guia essencial para dominar sua base.</p>
+                
+                <div class="course-content" style="text-align: left; background: #0f1117; padding: 25px; border-radius: 12px; border: 1px solid #2d3748; line-height: 1.6;">
+                    <h3 style="color: white; border-bottom: 1px solid #2d3748; padding-bottom: 10px;">1. Entendendo a Estrutura</h3>
+                    <p style="color: #cbd5e1; margin-bottom: 15px;">Toda cidade FiveM roda sobre um framework (vRP, vRPex ou Creative). O coração da cidade é a pasta <code style="background: #1e293b; padding: 2px 5px; border-radius: 4px;">resources</code>.</p>
+                    
+                    <h3 style="color: white; border-bottom: 1px solid #2d3748; padding-bottom: 10px; margin-top: 20px;">2. O segredo da LUA</h3>
+                    <p style="color: #cbd5e1; margin-bottom: 15px;">FiveM usa a linguagem LUA. Você precisa entender dois lados:<br>
+                    • <b>Client:</b> Tudo que acontece na tela do jogador (menus, efeitos, sons).<br>
+                    • <b>Server:</b> Tudo que mexe no banco de dados (dinheiro, itens, permissões).</p>
+                    
+                    <h3 style="color: white; border-bottom: 1px solid #2d3748; padding-bottom: 10px; margin-top: 20px;">3. Conectando com a Vida IA</h3>
+                    <p style="color: #cbd5e1;">Use a Vida IA para gerar a base do código, mas sempre leia o arquivo <code style="background: #1e293b; padding: 2px 5px; border-radius: 4px;">fxmanifest.lua</code> para garantir que o script seja carregado corretamente pelo servidor.</p>
+                    
+                    <div style="margin-top: 30px; padding: 15px; background: rgba(251, 191, 36, 0.1); border-left: 4px solid #fbbf24;">
+                        <p style="color: #fbbf24; font-weight: bold; margin: 0;">Dica de Ouro:</p>
+                        <p style="color: white; margin: 5px 0 0 0;">Nunca edite scripts com o servidor ligado sem testar antes localmente. Use o comando <code style="background: #1e293b; padding: 2px 5px;">ensure [nome_do_script]</code> no console para atualizar mudanças em tempo real.</p>
+                    </div>
                 </div>
             </div>
         </div>

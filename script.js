@@ -168,11 +168,30 @@ async function injectScriptReal(folderName, files) {
 // ESTATÍSTICAS DO SISTEMA
 let totalViews = parseInt(localStorage.getItem('vida_ia_total_views')) || 0;
 let totalScriptsGenerated = parseInt(localStorage.getItem('vida_ia_total_scripts')) || 0;
+let hasVipCourse = localStorage.getItem('vida_ia_has_vip') === 'true';
 
 function trackPageView() {
     totalViews++;
     localStorage.setItem('vida_ia_total_views', totalViews);
     updateAdminStats();
+    checkVipAccess();
+}
+
+function checkVipAccess() {
+    if (hasVipCourse || isOwner) {
+        // Adiciona o botão do curso na sidebar se for VIP
+        const navMenu = document.querySelector('.nav-menu');
+        if (navMenu && !document.getElementById('vip-course-btn')) {
+            const courseBtn = document.createElement('div');
+            courseBtn.id = 'vip-course-btn';
+            courseBtn.className = 'nav-item';
+            courseBtn.style.color = '#fbbf24';
+            courseBtn.style.border = '1px solid rgba(251, 191, 36, 0.2)';
+            courseBtn.innerHTML = '<i class="fas fa-graduation-cap"></i> Curso Programação';
+            courseBtn.onclick = openCourseModal;
+            navMenu.appendChild(courseBtn);
+        }
+    }
 }
 
 function trackScriptGeneration() {
@@ -284,6 +303,14 @@ function closeAdminModal() {
     document.getElementById('admin-modal').style.display = 'none';
 }
 
+function openCourseModal() {
+    document.getElementById('course-modal').style.display = 'block';
+}
+
+function closeCourseModal() {
+    document.getElementById('course-modal').style.display = 'none';
+}
+
 function releaseCredits() {
     const targetEmail = document.getElementById('admin-target-email').value.trim();
     const amount = document.getElementById('admin-amount').value;
@@ -300,7 +327,16 @@ function releaseCredits() {
         65280 // Verde
     );
 
-    alert(`Sucesso! ${amount} créditos foram enviados para ${targetEmail}.`);
+    // Se a quantidade for 100 (referente ao plano VIP de 50 reais), libera o curso
+    if (parseInt(amount) === 100) {
+        localStorage.setItem('vida_ia_has_vip', 'true');
+        hasVipCourse = true;
+        checkVipAccess();
+        alert(`Sucesso! 100 créditos e o CURSO VIP foram liberados para ${targetEmail}.`);
+    } else {
+        alert(`Sucesso! ${amount} créditos foram enviados para ${targetEmail}.`);
+    }
+    
     closeAdminModal();
 }
 
@@ -338,7 +374,7 @@ function buyPlan(name, price, amount) {
 }
 
 function confirmPayment() {
-    const email = document.getElementById('email-field') ? document.getElementById('email-field').value : "Usuário Desconhecido";
+    const email = document.getElementById('auth-email') ? document.getElementById('auth-email').value : "Usuário Desconhecido";
     const plan = window.selectedPlan ? window.selectedPlan.name : "Nenhum";
     const price = window.selectedPlan ? window.selectedPlan.price : "0";
 
@@ -349,6 +385,12 @@ function confirmPayment() {
     );
 
     alert("Pagamento enviado para análise! Seus créditos serão liberados em instantes.");
+    
+    // Se for o plano VIP, já mostra um gostinho do curso ou avisa que será liberado
+    if (plan === 'VIP') {
+        alert("💎 Detectamos que você adquiriu o Plano VIP! Após a confirmação do pagamento pelo Admin, o curso 'Como Programar Cidade' será liberado no seu painel.");
+    }
+
     closePixModal();
 }
 
