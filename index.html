@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vida IA - Assistente FiveM</title>
+    <link rel="stylesheet" href="style.css?v=1.1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Overlay de Login Simplificado ao Máximo -->
+    <div id="auth-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #1a1d24; z-index: 99999; display: flex; align-items: center; justify-content: center;">
+        <div style="background: #232731; padding: 40px; border-radius: 20px; border: 1px solid #374151; width: 400px; text-align: center;">
+            <div style="color: #60a5fa; font-size: 2rem; margin-bottom: 20px; font-weight: bold;">
+                <i class="fas fa-bolt"></i> Vida IA
+            </div>
+            <h2 style="color: white; margin-bottom: 10px;">Bem-vindo ao Futuro</h2>
+            <p style="color: #94a3b8; margin-bottom: 30px;">Entre com seu e-mail para começar.</p>
+            
+            <input type="email" id="auth-email" placeholder="Seu e-mail" style="width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #2d3748; background: #0f1117; color: white;">
+            <input type="password" id="auth-password" placeholder="Sua senha" style="width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #2d3748; background: #0f1117; color: white;">
+            
+            <button onclick="handleAuth()" id="login-button" style="width: 100%; padding: 15px; background: #10b981; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">
+                Entrar / Cadastrar
+            </button>
+        </div>
+    </div>
+
+    <div class="app-container" id="app-main" style="display: none;">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-bolt"></i>
+                <span>Vida IA</span>
+            </div>
+            <nav class="nav-menu">
+                <div class="nav-item active" onclick="showChat()"><i class="fas fa-comments"></i> Chat</div>
+                <div class="nav-item" onclick="startCreateScript()"><i class="fas fa-code"></i> Criar Script</div>
+                <div class="nav-item" onclick="startBugFix()"><i class="fas fa-wrench"></i> Corrigir Erro</div>
+                <div class="nav-item" onclick="startUploadBase()"><i class="fas fa-folder-open"></i> Enviar Base</div>
+                <!-- Botão Estilo Kiro para Conectar Pasta Real -->
+                <div id="connect-folder-btn" class="nav-item" style="color: #10b981 !important; border: 1px solid rgba(16, 185, 129, 0.2);" onclick="connectServerFolder()">
+                    <i class="fas fa-link"></i> Conectar Pasta (Kiro)
+                </div>
+                <input type="file" id="base-upload" webkitdirectory directory multiple style="display: none;" onchange="handleBaseSelection(event)">
+                <div class="nav-item buy-credits" onclick="openCreditsModal()"><i class="fas fa-coins"></i> Comprar Créditos</div>
+                <!-- Botão Admin (Sumi por padrão) -->
+                <div id="admin-btn" class="nav-item" style="display: none; color: #ef4444 !important; border: 1px solid rgba(239, 68, 68, 0.2);" onclick="openAdminModal()">
+                    <i class="fas fa-user-shield"></i> Painel Admin
+                </div>
+            </nav>
+            <div class="credits-info">
+                <span>Créditos: <span id="current-credits">∞</span></span>
+                <p id="user-role">Modo Owner Ativado</p>
+            </div>
+        </aside>
+
+        <!-- Modais -->
+        <div id="credits-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeCreditsModal()">&times;</span>
+                <h2>Planos Premium - Vida IA</h2>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">Escolha o poder computacional ideal para o seu servidor.</p>
+                <div class="plans-container">
+                    <div class="plan-card">
+                        <div class="plan-badge">STARTER</div>
+                        <h3>Plano Bronze</h3>
+                        <p class="price">R$ 29,90</p>
+                        <ul class="plan-features">
+                            <li><i class="fas fa-check"></i> 50 Créditos</li>
+                            <li><i class="fas fa-check"></i> Scripts vRP Básicos</li>
+                            <li><i class="fas fa-check"></i> Suporte via Discord</li>
+                        </ul>
+                        <button onclick="buyPlan('Bronze', 29.90, 50)">Selecionar Plano</button>
+                    </div>
+                    <div class="plan-card featured">
+                        <div class="plan-badge blue">MOST POPULAR</div>
+                        <h3>Plano Prata</h3>
+                        <p class="price">R$ 59,90</p>
+                        <ul class="plan-features">
+                            <li><i class="fas fa-check"></i> 150 Créditos</li>
+                            <li><i class="fas fa-check"></i> Scripts vRP Avançados</li>
+                            <li><i class="fas fa-check"></i> Prioridade na Fila</li>
+                        </ul>
+                        <button onclick="buyPlan('Prata', 59.90, 150)">Selecionar Plano</button>
+                    </div>
+                    <div class="plan-card">
+                        <div class="plan-badge purple">ENTERPRISE</div>
+                        <h3>Plano Ouro</h3>
+                        <p class="price">R$ 99,90</p>
+                        <ul class="plan-features">
+                            <li><i class="fas fa-check"></i> 500 Créditos</li>
+                            <li><i class="fas fa-check"></i> IA Sem Limites</li>
+                            <li><i class="fas fa-check"></i> Suporte VIP 24h</li>
+                        </ul>
+                        <button onclick="buyPlan('Ouro', 99.90, 500)">Selecionar Plano</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="pix-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closePixModal()">&times;</span>
+                <h2>Pagamento via Pix</h2>
+                <div class="pix-details">
+                    <p>Use a chave abaixo:</p>
+                    <div class="pix-key">Chave Pix (E-mail):<br><strong>fernandesdavizin8@gmail.com</strong></div>
+                    <p class="amount-display">Valor: <span id="pix-amount">R$ 0,00</span></p>
+                    <button class="confirm-btn" onclick="confirmPayment()">Já realizei o pagamento</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Admin (Liberar Créditos) -->
+        <div id="admin-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeAdminModal()">&times;</span>
+                <h2>Gerenciar Créditos</h2>
+                <p style="color: var(--text-muted); margin-bottom: 10px;">Libere créditos para seus clientes aqui.</p>
+                <div class="admin-input-group">
+                    <input type="email" id="admin-target-email" placeholder="E-mail do Cliente">
+                    <input type="number" id="admin-amount" placeholder="Quantidade de Créditos">
+                    <button class="admin-btn" onclick="releaseCredits()">Liberar Créditos Agora</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="server-info">
+                    <i class="fas fa-server"></i>
+                    <span id="connected-server">Nenhum servidor conectado</span>
+                </div>
+                <div class="user-profile">
+                    <span>Admin</span>
+                    <img src="https://ui-avatars.com/api/?name=Admin&background=0D8ABC&color=fff" alt="User">
+                </div>
+            </header>
+
+            <div class="content-wrapper">
+                <div class="chat-section">
+                    <div class="chat-area" id="chat-area">
+                        <div class="welcome-message">
+                            <i class="fas fa-bolt main-bolt"></i>
+                            <h1>Vida IA</h1>
+                            <p>Bem-vindo à nova era do FiveM. Potencialize seu servidor com inteligência real.</p>
+                            <div class="quick-actions">
+                                <div class="action-card" onclick="startCreateScript()">
+                                    <i class="fas fa-code"></i>
+                                    <h3>Criar Script</h3>
+                                    <p>Gere arquivos direto na pasta resources</p>
+                                </div>
+                                <div class="action-card" onclick="startBugFix()">
+                                    <i class="fas fa-wrench"></i>
+                                    <h3>Corrigir Erro</h3>
+                                    <p>Analise erros do F8 e corrija na hora</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <footer class="input-area">
+                        <div class="input-wrapper" style="padding: 20px; background: #161922; border-top: 1px solid #2d3748; display: flex; gap: 10px;">
+                            <input type="text" id="user-input" placeholder="O que vamos construir hoje?" style="flex: 1; background: #0f1117; border: 1px solid #2d3748; color: white; padding: 12px; border-radius: 8px; outline: none;">
+                            <button id="send-btn" style="background: #3b82f6; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer;"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </footer>
+                </div>
+
+                <aside class="files-panel">
+                    <div class="panel-header">
+                        <i class="fas fa-folder-tree"></i>
+                        <span>Arquivos Alterados</span>
+                    </div>
+                    <div class="files-list" id="files-list">
+                        <p class="empty-files">Nenhuma alteração aplicada ainda.</p>
+                    </div>
+                    <div class="panel-footer">
+                        <button class="restart-btn" onclick="simulateRestart()">
+                            <i class="fas fa-sync"></i> Dar Restart no Servidor
+                        </button>
+                    </div>
+                </aside>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
