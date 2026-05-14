@@ -168,7 +168,6 @@ async function injectScriptReal(folderName, files) {
 // ESTATÍSTICAS DO SISTEMA
 let totalViews = parseInt(localStorage.getItem('vida_ia_total_views')) || 0;
 let totalScriptsGenerated = parseInt(localStorage.getItem('vida_ia_total_scripts')) || 0;
-let hasVipCourse = localStorage.getItem('vida_ia_has_vip') === 'true';
 
 function trackPageView() {
     totalViews++;
@@ -179,29 +178,41 @@ function trackPageView() {
 
 function checkVipAccess() {
     const isVip = localStorage.getItem('vida_ia_has_vip') === 'true' || isOwner;
+    const isMaster = localStorage.getItem('vida_ia_has_master') === 'true' || isOwner;
     
-    if (isVip) {
-        // Adiciona o botão do curso na sidebar se for VIP ou Dono
-        const navMenu = document.querySelector('.nav-menu');
-        if (navMenu && !document.getElementById('vip-course-btn')) {
-            const courseBtn = document.createElement('div');
-            courseBtn.id = 'vip-course-btn';
-            courseBtn.className = 'nav-item';
-            courseBtn.style.color = '#fbbf24';
-            courseBtn.style.marginTop = '10px';
-            courseBtn.style.border = '1px solid rgba(251, 191, 36, 0.4)';
-            courseBtn.style.background = 'rgba(251, 191, 36, 0.05)';
-            courseBtn.innerHTML = '<i class="fas fa-graduation-cap"></i> Curso Programação';
-            courseBtn.onclick = openCourseModal;
-            
-            // Insere antes do botão de Comprar Créditos para ficar bem visível
-            const buyBtn = document.querySelector('.buy-credits');
-            if (buyBtn) {
-                navMenu.insertBefore(courseBtn, buyBtn);
-            } else {
-                navMenu.appendChild(courseBtn);
-            }
-        }
+    const navMenu = document.querySelector('.nav-menu');
+    if (!navMenu) return;
+
+    // Botão VIP (Start Base)
+    if (isVip && !document.getElementById('vip-course-btn')) {
+        const courseBtn = document.createElement('div');
+        courseBtn.id = 'vip-course-btn';
+        courseBtn.className = 'nav-item';
+        courseBtn.style.color = '#fbbf24';
+        courseBtn.style.marginTop = '10px';
+        courseBtn.style.border = '1px solid rgba(251, 191, 36, 0.4)';
+        courseBtn.style.background = 'rgba(251, 191, 36, 0.05)';
+        courseBtn.innerHTML = '<i class="fas fa-graduation-cap"></i> Curso: Start Base';
+        courseBtn.onclick = openCourseModal;
+        
+        const buyBtn = document.querySelector('.buy-credits');
+        navMenu.insertBefore(courseBtn, buyBtn || null);
+    }
+
+    // Botão Master (Programação Completa)
+    if (isMaster && !document.getElementById('master-course-btn')) {
+        const masterBtn = document.createElement('div');
+        masterBtn.id = 'master-course-btn';
+        masterBtn.className = 'nav-item';
+        masterBtn.style.color = '#a855f7';
+        masterBtn.style.marginTop = '10px';
+        masterBtn.style.border = '1px solid rgba(168, 85, 247, 0.4)';
+        masterBtn.style.background = 'rgba(168, 85, 247, 0.05)';
+        masterBtn.innerHTML = '<i class="fas fa-rocket"></i> Curso: Master Prog';
+        masterBtn.onclick = openMasterCourseModal;
+        
+        const buyBtn = document.querySelector('.buy-credits');
+        navMenu.insertBefore(masterBtn, buyBtn || null);
     }
 }
 
@@ -323,6 +334,14 @@ function closeCourseModal() {
     document.getElementById('course-modal').style.display = 'none';
 }
 
+function openMasterCourseModal() {
+    document.getElementById('master-course-modal').style.display = 'block';
+}
+
+function closeMasterCourseModal() {
+    document.getElementById('master-course-modal').style.display = 'none';
+}
+
 function releaseCredits() {
     const targetEmail = document.getElementById('admin-target-email').value.trim();
     const amount = document.getElementById('admin-amount').value;
@@ -339,12 +358,16 @@ function releaseCredits() {
         65280 // Verde
     );
 
-    // Se a quantidade for 100 (referente ao plano VIP de 50 reais), libera o curso
+    // Se a quantidade for 100 (referente ao plano VIP de 50 reais), libera o curso VIP
     if (parseInt(amount) === 100) {
         localStorage.setItem('vida_ia_has_vip', 'true');
-        hasVipCourse = true;
         checkVipAccess();
-        alert(`Sucesso! 100 créditos e o CURSO VIP foram liberados para ${targetEmail}.`);
+        alert(`Sucesso! 100 créditos e o CURSO VIP (Start Base) foram liberados para ${targetEmail}.`);
+    } else if (parseInt(amount) === 500) {
+        // Se a quantidade for 500 (referente ao plano Master), libera o curso Master
+        localStorage.setItem('vida_ia_has_master', 'true');
+        checkVipAccess();
+        alert(`Sucesso! 500 créditos e o CURSO MASTER (Programação Completa) foram liberados para ${targetEmail}.`);
     } else {
         alert(`Sucesso! ${amount} créditos foram enviados para ${targetEmail}.`);
     }
