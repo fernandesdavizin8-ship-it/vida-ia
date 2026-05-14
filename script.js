@@ -580,12 +580,18 @@ function sendMessage() {
     }
 
     setTimeout(async () => {
-        // Agora a IA é proativa: se detectar comandos, nomes de base (vRP/Creative) ou se for uma frase de pedido, ela gera o script.
-        const isRequest = currentMode === 'create' || currentMode === 'fix' || 
+        const lowerText = text.toLowerCase();
+        
+        // NOVO: Lista expandida de gatilhos para FiveM
+        const fivemKeywords = ['lixeiro', 'policia', 'medico', 'mecanico', 'ilegal', 'drogas', 'bau', 'garagem', 'concessionaria', 'banco', 'salario', 'roupas', 'identidade', 'spawn', 'carro', 'arma'];
+        const hasKeyword = fivemKeywords.some(keyword => lowerText.includes(keyword));
+
+        // Se estiver no modo de criação/correção OU se digitar uma palavra de FiveM, gera o script
+        const isRequest = (typeof currentMode !== 'undefined' && (currentMode === 'create' || currentMode === 'fix')) || 
                          lowerText.includes('criar') || lowerText.includes('faz') || lowerText.includes('script') || 
                          lowerText.includes('sistema') || lowerText.includes('/') || lowerText.includes('vrp') || 
                          lowerText.includes('creative') || lowerText.includes('comando') || lowerText.includes('erro') ||
-                         lowerText.includes('bug') || lowerText.includes('corrigir');
+                         lowerText.includes('bug') || lowerText.includes('corrigir') || hasKeyword;
 
         if (isRequest) {
             // Se for pedido de script mas não tiver pasta conectada, avisa mas permite gerar no painel lateral
@@ -593,7 +599,7 @@ function sendMessage() {
                 addMessage('ai', "⚠️ **Nota:** Você ainda não conectou sua pasta via 'Conectar Pasta (Kiro)'. Eu vou gerar o código no seu **Painel Lateral de Arquivos**, mas recomendo conectar a pasta para eu injetar o script direto no seu servidor.");
             }
 
-            const isBugFix = currentMode === 'fix' || lowerText.includes('corrigir') || lowerText.includes('erro') || lowerText.includes('bug');
+            const isBugFix = (typeof currentMode !== 'undefined' && currentMode === 'fix') || lowerText.includes('corrigir') || lowerText.includes('erro') || lowerText.includes('bug');
             
             addMessage('ai', isBugFix ? "🔍 Analisando falhas e corrigindo código..." : "🚀 Vida IA Processando... Gerando seu script FiveM de alta performance.");
             
