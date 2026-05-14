@@ -116,7 +116,24 @@
         <div id="admin-modal" class="modal">
             <div class="modal-content">
                 <span class="close" onclick="closeAdminModal()">&times;</span>
-                <h2>Gerenciar Créditos</h2>
+                <h2>Painel do Proprietário</h2>
+                
+                <div class="admin-stats-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; margin-top: 20px;">
+                    <div style="background: #0f1117; padding: 15px; border-radius: 12px; border: 1px solid #2d3748; text-align: center;">
+                        <i class="fas fa-users" style="color: #3b82f6; font-size: 1.5rem; margin-bottom: 10px;"></i>
+                        <h4 style="color: #94a3b8; font-size: 0.8rem; text-transform: uppercase;">Total de Acessos</h4>
+                        <p id="stats-total-views" style="font-size: 1.8rem; font-weight: bold; color: white;">0</p>
+                    </div>
+                    <div style="background: #0f1117; padding: 15px; border-radius: 12px; border: 1px solid #2d3748; text-align: center;">
+                        <i class="fas fa-magic" style="color: #10b981; font-size: 1.5rem; margin-bottom: 10px;"></i>
+                        <h4 style="color: #94a3b8; font-size: 0.8rem; text-transform: uppercase;">Scripts Gerados</h4>
+                        <p id="stats-total-scripts" style="font-size: 1.8rem; font-weight: bold; color: white;">0</p>
+                    </div>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid #2d3748; margin-bottom: 20px;">
+
+                <h3>Gerenciar Créditos</h3>
                 <p style="color: var(--text-muted); margin-bottom: 10px;">Libere créditos para seus clientes aqui.</p>
                 <div class="admin-input-group">
                     <input type="email" id="admin-target-email" placeholder="E-mail do Cliente">

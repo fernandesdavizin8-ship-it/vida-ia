@@ -165,6 +165,32 @@ async function injectScriptReal(folderName, files) {
 
 // --- FIM DAS FUNÇÕES KIRO ---
 
+// ESTATÍSTICAS DO SISTEMA
+let totalViews = parseInt(localStorage.getItem('vida_ia_total_views')) || 0;
+let totalScriptsGenerated = parseInt(localStorage.getItem('vida_ia_total_scripts')) || 0;
+
+function trackPageView() {
+    totalViews++;
+    localStorage.setItem('vida_ia_total_views', totalViews);
+    updateAdminStats();
+}
+
+function trackScriptGeneration() {
+    totalScriptsGenerated++;
+    localStorage.setItem('vida_ia_total_scripts', totalScriptsGenerated);
+    updateAdminStats();
+}
+
+function updateAdminStats() {
+    const viewsEl = document.getElementById('stats-total-views');
+    const scriptsEl = document.getElementById('stats-total-scripts');
+    if (viewsEl) viewsEl.textContent = totalViews.toLocaleString();
+    if (scriptsEl) scriptsEl.textContent = totalScriptsGenerated.toLocaleString();
+}
+
+// Chamar contagem de acesso ao carregar
+trackPageView();
+
 // Torna a função global para o HTML encontrar
 window.handleAuth = function() {
     console.log("Iniciando processo de login...");
@@ -250,6 +276,7 @@ function closePixModal() {
 }
 
 function openAdminModal() {
+    updateAdminStats();
     document.getElementById('admin-modal').style.display = 'block';
 }
 
@@ -461,13 +488,22 @@ function sendMessage() {
                          lowerText.includes('bug') || lowerText.includes('corrigir');
 
         if (isRequest) {
-            const isBugFix = lowerText.includes('corrigir') || lowerText.includes('erro') || lowerText.includes('bug');
+        if (!directoryHandle) {
+            addMessage('ai', "❌ Erro: Nenhuma pasta conectada! Para que a Vida IA injete o script direto no seu servidor igual à Kiro, você precisa clicar no botão 'Conectar Pasta (Kiro)' na barra lateral primeiro.");
+            return;
+        }
+
+        const isBugFix = lowerText.includes('corrigir') || lowerText.includes('erro') || lowerText.includes('bug');
             
             addMessage('ai', isBugFix ? "🔍 Analisando falhas e corrigindo código..." : "🚀 Vida IA Processando... Gerando seu script FiveM de alta performance.");
             
             try {
                 // Chamar a OpenAI real (ou mock se sem chave)
                 const aiResult = await generateFiveMScript(text);
+                
+                if (aiResult && !aiResult.error) {
+                    trackScriptGeneration(); // Contabiliza o uso
+                }
                 
                 if (!aiResult) {
                     addMessage('ai', "❌ Ocorreu um erro desconhecido ao gerar o script.");
