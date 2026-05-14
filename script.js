@@ -178,18 +178,29 @@ function trackPageView() {
 }
 
 function checkVipAccess() {
-    if (hasVipCourse || isOwner) {
-        // Adiciona o botão do curso na sidebar se for VIP
+    const isVip = localStorage.getItem('vida_ia_has_vip') === 'true' || isOwner;
+    
+    if (isVip) {
+        // Adiciona o botão do curso na sidebar se for VIP ou Dono
         const navMenu = document.querySelector('.nav-menu');
         if (navMenu && !document.getElementById('vip-course-btn')) {
             const courseBtn = document.createElement('div');
             courseBtn.id = 'vip-course-btn';
             courseBtn.className = 'nav-item';
             courseBtn.style.color = '#fbbf24';
-            courseBtn.style.border = '1px solid rgba(251, 191, 36, 0.2)';
+            courseBtn.style.marginTop = '10px';
+            courseBtn.style.border = '1px solid rgba(251, 191, 36, 0.4)';
+            courseBtn.style.background = 'rgba(251, 191, 36, 0.05)';
             courseBtn.innerHTML = '<i class="fas fa-graduation-cap"></i> Curso Programação';
             courseBtn.onclick = openCourseModal;
-            navMenu.appendChild(courseBtn);
+            
+            // Insere antes do botão de Comprar Créditos para ficar bem visível
+            const buyBtn = document.querySelector('.buy-credits');
+            if (buyBtn) {
+                navMenu.insertBefore(courseBtn, buyBtn);
+            } else {
+                navMenu.appendChild(courseBtn);
+            }
         }
     }
 }
@@ -259,6 +270,7 @@ window.handleAuth = function() {
         container.style.display = 'flex';
     }
     
+    checkVipAccess(); // Checar acesso ao curso logo após o login
     console.log("Login concluído com sucesso!");
 };
 
