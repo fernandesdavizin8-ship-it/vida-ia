@@ -57,6 +57,9 @@
                 </div>
                 <input type="file" id="base-upload" webkitdirectory directory multiple style="display: none;" onchange="handleBaseSelection(event)">
                 <div class="nav-item buy-credits" onclick="openCreditsModal()"><i class="fas fa-coins"></i> Comprar Créditos</div>
+                <a href="https://discord.gg/wWSbBjsE" target="_blank" class="nav-item" style="text-decoration: none; color: #5865F2 !important; border: 1px solid rgba(88, 101, 242, 0.2); background: rgba(88, 101, 242, 0.05);">
+                    <i class="fab fa-discord"></i> Nosso Discord
+                </a>
                 <div id="admin-btn" class="nav-item" style="display: none; color: #ef4444 !important; border: 1px solid rgba(239, 68, 68, 0.2);" onclick="openAdminModal()">
                     <i class="fas fa-user-shield"></i> Painel Admin
                 </div>
@@ -92,6 +95,50 @@
                             </div>
                             <h1 style="color: white; margin-bottom: 10px; font-family: 'Orbitron', sans-serif;">Vida IA</h1>
                             <p style="color: #94a3b8;">Pronto para construir o futuro do seu FiveM?</p>
+
+                            <div class="quick-actions">
+                                <div class="action-card" onclick="startCreateScript()">
+                                    <i class="fas fa-code"></i>
+                                    <h3>Criar Script</h3>
+                                    <p>Gere arquivos direto na pasta resources</p>
+                                </div>
+                                <div class="action-card" onclick="startBugFix()">
+                                    <i class="fas fa-wrench"></i>
+                                    <h3>Corrigir Erro</h3>
+                                    <p>Analise erros do F8 e corrija na hora</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Seção de Atividade Recente -->
+                        <div id="recent-activity" style="margin-top: 50px; width: 100%; max-width: 600px; background: rgba(22, 25, 34, 0.6); border-radius: 16px; border: 1px solid rgba(255,255,255,0.05); padding: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+                                <h3 style="color: white; font-size: 1.1rem; display: flex; align-items: center; gap: 10px;">
+                                    <i class="fas fa-bolt" style="color: #3b82f6;"></i> Atividade Global da IA
+                                </h3>
+                                <span style="background: #10b981; color: #000; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase;">Live</span>
+                            </div>
+                            <div id="activity-list" style="display: flex; flex-direction: column; gap: 15px;">
+                                <!-- Scripts serão inseridos aqui pelo JS -->
+                                <div class="activity-item" style="display: flex; align-items: center; gap: 15px; padding: 12px; background: rgba(15, 17, 23, 0.8); border-radius: 10px; border-left: 3px solid #3b82f6;">
+                                    <div style="width: 40px; height: 40px; background: rgba(59, 130, 246, 0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #3b82f6;">
+                                        <i class="fas fa-code"></i>
+                                    </div>
+                                    <div style="flex: 1;">
+                                        <p style="color: #e2e8f0; font-size: 0.9rem; margin: 0;">Script <b>vrp_garagem</b> gerado com sucesso.</p>
+                                        <span style="color: #64748b; font-size: 0.75rem;">há 2 minutos por lucas***@gmail.com</span>
+                                    </div>
+                                </div>
+                                <div class="activity-item" style="display: flex; align-items: center; gap: 15px; padding: 12px; background: rgba(15, 17, 23, 0.8); border-radius: 10px; border-left: 3px solid #10b981;">
+                                    <div style="width: 40px; height: 40px; background: rgba(16, 185, 129, 0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #10b981;">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <div style="flex: 1;">
+                                        <p style="color: #e2e8f0; font-size: 0.9rem; margin: 0;">Plano <b>VIP</b> adquirido.</p>
+                                        <span style="color: #64748b; font-size: 0.75rem;">há 15 minutos por pablo***@hotmail.com</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
