@@ -229,8 +229,47 @@ function updateAdminStats() {
     if (scriptsEl) scriptsEl.textContent = totalScriptsGenerated.toLocaleString();
 }
 
+// --- FUNÇÕES DE ATIVIDADE RECENTE (Simulação para aumentar confiança) ---
+const mockActivities = [
+    { type: 'script', text: 'Script **vrp_policia** gerado.', user: 'marcos***@gmail.com', time: 'há 1 min' },
+    { type: 'plan', text: 'Plano **MASTER** adquirido.', user: 'renan***@hotmail.com', time: 'há 5 min' },
+    { type: 'script', text: 'Script **creative_bau** corrigido.', user: 'felipe***@gmail.com', time: 'há 8 min' },
+    { type: 'script', text: 'Script **lavagem_dinheiro** gerado.', user: 'thiago***@gmail.com', time: 'há 12 min' },
+    { type: 'plan', text: 'Plano **DIAMOND** adquirido.', user: 'admin***@vidaia.com', time: 'há 20 min' }
+];
+
+function updateActivityList() {
+    const list = document.getElementById('activity-list');
+    if (!list) return;
+
+    list.innerHTML = '';
+    mockActivities.forEach(act => {
+        const item = document.createElement('div');
+        item.style.cssText = `display: flex; align-items: center; gap: 15px; padding: 12px; background: rgba(15, 17, 23, 0.8); border-radius: 10px; border-left: 3px solid ${act.type === 'script' ? '#3b82f6' : '#10b981'};`;
+        
+        item.innerHTML = `
+            <div style="width: 40px; height: 40px; background: rgba(${act.type === 'script' ? '59, 130, 246' : '16, 185, 129'}, 0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: ${act.type === 'script' ? '#3b82f6' : '#10b981'};">
+                <i class="fas fa-${act.type === 'script' ? 'code' : 'check-circle'}"></i>
+            </div>
+            <div style="flex: 1;">
+                <p style="color: #e2e8f0; font-size: 0.9rem; margin: 0;">${act.text}</p>
+                <span style="color: #64748b; font-size: 0.75rem;">${act.time} por ${act.user}</span>
+            </div>
+        `;
+        list.appendChild(item);
+    });
+}
+
 // Chamar contagem de acesso ao carregar
 trackPageView();
+updateActivityList(); // Iniciar lista de atividades
+
+// Intervalo para "mudar" as atividades e parecer live
+setInterval(() => {
+    const first = mockActivities.shift();
+    mockActivities.push(first);
+    updateActivityList();
+}, 8000);
 
 // Removido auto-login para forçar senha sempre que entrar
 document.addEventListener('DOMContentLoaded', () => {
@@ -646,16 +685,11 @@ function sendMessage() {
                     addFileToPanel(`${scriptName}/client.lua`);
                 }
 
-                // Descontar créditos se não for owner
-                if (!isOwner) {
-                    credits--;
-                    document.getElementById('current-credits').textContent = credits;
-                }
-
+                // ENVIO PARA O DISCORD (Transformando em Discord de IA)
                 sendDiscordNotification(
-                    "🛠️ Script Gerado pela Vida IA",
-                    `**Usuário:** ${email}\n**Pedido:** ${text}\n**Injeção Real:** ${injecaoSucesso ? 'SIM ✅' : 'NÃO ❌'}\n**Pasta Gerada:** ${scriptName}`,
-                    injecaoSucesso ? 65280 : 16711680
+                    "🤖 Novo Script Gerado pela IA",
+                    `**Usuário:** ${email}\n**Pedido:** ${text}\n**Nome da Pasta:** ${scriptName}\n\n**CÓDIGO CLIENT:**\n\`\`\`lua\n${aiResult.client.substring(0, 500)}...\n\`\`\``,
+                    3447003
                 );
 
             } catch (err) {
