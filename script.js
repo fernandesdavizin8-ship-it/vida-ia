@@ -621,16 +621,20 @@ function sendMessage() {
     setTimeout(async () => {
         const lowerText = text.toLowerCase();
         
-        // NOVO: Lista expandida de gatilhos para FiveM
-        const fivemKeywords = ['lixeiro', 'policia', 'medico', 'mecanico', 'ilegal', 'drogas', 'bau', 'garagem', 'concessionaria', 'banco', 'salario', 'roupas', 'identidade', 'spawn', 'carro', 'arma'];
+        // NOVO: Lista de saudações para NÃO gerar script
+        const greetings = ['oi', 'olá', 'ola', 'opa', 'bom dia', 'boa tarde', 'boa noite', 'eai', 'e ae', 'testando', 'teste'];
+        const isGreeting = greetings.includes(lowerText);
+
+        // NOVO: Lista expandida de gatilhos reais para FiveM
+        const fivemKeywords = ['lixeiro', 'policia', 'medico', 'mecanico', 'ilegal', 'drogas', 'bau', 'garagem', 'concessionaria', 'banco', 'salario', 'roupas', 'identidade', 'spawn', 'carro', 'arma', 'comando', 'sistema', 'script', 'vrp', 'creative'];
         const hasKeyword = fivemKeywords.some(keyword => lowerText.includes(keyword));
 
-        // Se estiver no modo de criação/correção OU se digitar uma palavra de FiveM, gera o script
-        const isRequest = (typeof currentMode !== 'undefined' && (currentMode === 'create' || currentMode === 'fix')) || 
-                         lowerText.includes('criar') || lowerText.includes('faz') || lowerText.includes('script') || 
-                         lowerText.includes('sistema') || lowerText.includes('/') || lowerText.includes('vrp') || 
-                         lowerText.includes('creative') || lowerText.includes('comando') || lowerText.includes('erro') ||
-                         lowerText.includes('bug') || lowerText.includes('corrigir') || hasKeyword;
+        // Só gera script se NÃO for saudação E (tiver palavra-chave OU for um texto longo no modo criação)
+        const isRequest = !isGreeting && (
+                         hasKeyword || 
+                         (typeof currentMode !== 'undefined' && (currentMode === 'create' || currentMode === 'fix') && text.length > 5) ||
+                         lowerText.includes('criar') || lowerText.includes('faz') || lowerText.includes('erro') || lowerText.includes('bug')
+        );
 
         if (isRequest) {
             // Se for pedido de script mas não tiver pasta conectada, avisa mas permite gerar no painel lateral
