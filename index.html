@@ -8,33 +8,34 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <!-- Overlay de Login Simplificado ao Máximo -->
-        <div id="auth-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%); z-index: 99999; display: flex; align-items: center; justify-content: center;">
-            <div style="background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); padding: 50px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.1); width: 450px; text-align: center; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);">
-                <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #3b82f6, #7c3aed); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px; box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);">
-                    <i class="fas fa-bolt" style="color: white; font-size: 2.5rem;"></i>
-                </div>
-                <h1 style="color: white; font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; letter-spacing: -1px;">Vida IA</h1>
-                <p style="color: #94a3b8; margin-bottom: 35px; font-size: 1.1rem;">A inteligência artificial que constrói o seu servidor FiveM.</p>
-                
-                <div style="text-align: left; margin-bottom: 25px;">
-                    <label style="color: #cbd5e1; font-size: 0.9rem; margin-bottom: 8px; display: block; font-weight: 500;">E-mail de acesso</label>
-                    <input type="email" id="auth-email" placeholder="exemplo@email.com" style="width: 100%; padding: 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: rgba(15, 23, 42, 0.6); color: white; outline: none; transition: border-color 0.3s;">
-                </div>
-                
-                <div style="text-align: left; margin-bottom: 30px;">
-                    <label style="color: #cbd5e1; font-size: 0.9rem; margin-bottom: 8px; display: block; font-weight: 500;">Senha secreta</label>
-                    <input type="password" id="auth-password" placeholder="••••••••" style="width: 100%; padding: 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: rgba(15, 23, 42, 0.6); color: white; outline: none; transition: border-color 0.3s;">
-                </div>
-                
-                <button onclick="handleAuth()" id="login-button" style="width: 100%; padding: 16px; background: linear-gradient(to right, #3b82f6, #2563eb); color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);">
-                    Entrar no Painel
-                </button>
-                
-                <p style="color: #64748b; font-size: 0.85rem; margin-top: 25px;">Ao entrar, você concorda com nossos termos de uso.</p>
+    <!-- Overlay de Login -->
+    <div id="auth-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%); z-index: 99999; display: flex; align-items: center; justify-content: center;">
+        <div class="auth-forms" style="background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); padding: 50px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.1); width: 450px; text-align: center; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);">
+            <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #3b82f6, #7c3aed); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px; box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);">
+                <i class="fas fa-bolt" style="color: white; font-size: 2.5rem;"></i>
             </div>
+            <h1 style="color: white; font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; letter-spacing: -1px;">Vida IA</h1>
+            <p style="color: #94a3b8; margin-bottom: 35px; font-size: 1.1rem;">A inteligência artificial que constrói o seu servidor FiveM.</p>
+            
+            <div style="text-align: left; margin-bottom: 25px;">
+                <label style="color: #cbd5e1; font-size: 0.9rem; margin-bottom: 8px; display: block; font-weight: 500;">E-mail de acesso</label>
+                <input type="email" id="auth-email" placeholder="exemplo@email.com" style="width: 100%; padding: 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: rgba(15, 23, 42, 0.6); color: white; outline: none; transition: border-color 0.3s;">
+            </div>
+            
+            <div style="text-align: left; margin-bottom: 30px;">
+                <label style="color: #cbd5e1; font-size: 0.9rem; margin-bottom: 8px; display: block; font-weight: 500;">Senha secreta</label>
+                <input type="password" id="auth-password" placeholder="••••••••" style="width: 100%; padding: 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: rgba(15, 23, 42, 0.6); color: white; outline: none; transition: border-color 0.3s;">
+            </div>
+            
+            <button onclick="handleAuth()" id="login-button" style="width: 100%; padding: 16px; background: linear-gradient(to right, #3b82f6, #2563eb); color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);">
+                Entrar no Painel
+            </button>
+            
+            <p style="color: #64748b; font-size: 0.85rem; margin-top: 25px;">Ao entrar, você concorda com nossos termos de uso.</p>
         </div>
+    </div>
 
+    <!-- Container Principal da Aplicação -->
     <div class="app-container" id="app-main" style="display: none;">
         <!-- Sidebar -->
         <aside class="sidebar">
@@ -49,13 +50,11 @@
                 <div class="nav-item" onclick="startCreateScript()"><i class="fas fa-code"></i> Criar Script</div>
                 <div class="nav-item" onclick="startBugFix()"><i class="fas fa-wrench"></i> Corrigir Erro</div>
                 <div class="nav-item" onclick="startUploadBase()"><i class="fas fa-folder-open"></i> Enviar Base</div>
-                <!-- Botão Estilo Kiro para Conectar Pasta Real -->
                 <div id="connect-folder-btn" class="nav-item" style="color: #10b981 !important; border: 1px solid rgba(16, 185, 129, 0.2);" onclick="connectServerFolder()">
                     <i class="fas fa-link"></i> Conectar Pasta (Kiro)
                 </div>
                 <input type="file" id="base-upload" webkitdirectory directory multiple style="display: none;" onchange="handleBaseSelection(event)">
                 <div class="nav-item buy-credits" onclick="openCreditsModal()"><i class="fas fa-coins"></i> Comprar Créditos</div>
-                <!-- Botão Admin (Sumi por padrão) -->
                 <div id="admin-btn" class="nav-item" style="display: none; color: #ef4444 !important; border: 1px solid rgba(239, 68, 68, 0.2);" onclick="openAdminModal()">
                     <i class="fas fa-user-shield"></i> Painel Admin
                 </div>
@@ -66,226 +65,214 @@
             </div>
         </aside>
 
-        <!-- Modais -->
-        <div id="credits-modal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeCreditsModal()">&times;</span>
-                <h2>Planos Premium - Vida IA</h2>
-                <p style="color: var(--text-muted); margin-bottom: 20px;">Escolha o poder computacional ideal para o seu servidor.</p>
-                <div class="plans-container" style="display: flex; gap: 20px; justify-content: center; flex-wrap: nowrap; margin-top: 30px; overflow-x: auto; padding: 10px;">
-                    <div class="plan-card" style="background: #1e293b; padding: 20px; border-radius: 16px; min-width: 240px; border: 1px solid #334155; transition: transform 0.3s; position: relative;">
-                        <div class="plan-badge" style="position: absolute; top: -12px; right: 15px; background: #475569; padding: 5px 10px; border-radius: 20px; font-size: 0.65rem; font-weight: bold; color: white;">STARTER</div>
-                        <h3 style="margin-top: 5px; font-size: 1.1rem;">Plano Bronze</h3>
-                        <p class="price" style="font-size: 1.8rem; font-weight: bold; margin: 10px 0;">R$ 29,90</p>
-                        <ul class="plan-features" style="list-style: none; padding: 0; margin-bottom: 20px; text-align: left; font-size: 0.85rem;">
-                            <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: #10b981; margin-right: 6px;"></i> 50 Créditos</li>
-                            <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: #10b981; margin-right: 6px;"></i> Scripts vRP</li>
-                        </ul>
-                        <button onclick="buyPlan('Bronze', 29.90, 50)" style="width: 100%; padding: 10px; border-radius: 8px; border: none; background: #3b82f6; color: white; font-weight: bold; cursor: pointer;">Selecionar</button>
-                    </div>
-
-                    <div class="plan-card" style="background: #1e293b; padding: 20px; border-radius: 16px; min-width: 250px; border: 2px solid #fbbf24; position: relative; box-shadow: 0 10px 25px -5px rgba(251, 191, 36, 0.2);">
-                        <div class="plan-badge" style="position: absolute; top: -12px; right: 15px; background: #fbbf24; padding: 5px 10px; border-radius: 20px; font-size: 0.65rem; font-weight: bold; color: #000;">START BASE</div>
-                        <h3 style="margin-top: 5px; font-size: 1.1rem;">Plano VIP</h3>
-                        <p class="price" style="font-size: 1.8rem; font-weight: bold; margin: 10px 0; color: #fbbf24;">R$ 50,00</p>
-                        <ul class="plan-features" style="list-style: none; padding: 0; margin-bottom: 20px; text-align: left; font-size: 0.85rem;">
-                            <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: #fbbf24; margin-right: 6px;"></i> 100 Créditos</li>
-                            <li style="margin-bottom: 8px; color: #fbbf24; font-weight: bold;"><i class="fas fa-graduation-cap" style="margin-right: 6px;"></i> Curso: Start Base</li>
-                        </ul>
-                        <button onclick="buyPlan('VIP', 50.00, 100)" style="width: 100%; padding: 12px; border-radius: 8px; border: none; background: #fbbf24; color: #000; font-weight: bold; cursor: pointer;">Comprar Agora</button>
-                    </div>
-
-                    <div class="plan-card" style="background: #1e293b; padding: 20px; border-radius: 16px; min-width: 250px; border: 2px solid #a855f7; position: relative; box-shadow: 0 10px 25px -5px rgba(168, 85, 247, 0.2);">
-                        <div class="plan-badge" style="position: absolute; top: -12px; right: 15px; background: #a855f7; padding: 5px 10px; border-radius: 20px; font-size: 0.65rem; font-weight: bold; color: white;">MASTER PROG</div>
-                        <h3 style="margin-top: 5px; font-size: 1.1rem;">Plano Master</h3>
-                        <p class="price" style="font-size: 1.8rem; font-weight: bold; margin: 10px 0; color: #a855f7;">R$ 99,90</p>
-                        <ul class="plan-features" style="list-style: none; padding: 0; margin-bottom: 20px; text-align: left; font-size: 0.85rem;">
-                            <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: #a855f7; margin-right: 6px;"></i> 500 Créditos</li>
-                            <li style="margin-bottom: 8px; color: #a855f7; font-weight: bold;"><i class="fas fa-rocket" style="margin-right: 6px;"></i> Programação Completa</li>
-                        </ul>
-                        <button onclick="buyPlan('Master', 99.90, 500)" style="width: 100%; padding: 12px; border-radius: 8px; border: none; background: #a855f7; color: white; font-weight: bold; cursor: pointer;">Comprar Master</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="pix-modal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closePixModal()">&times;</span>
-                <h2>Pagamento via Pix</h2>
-                <div class="pix-details">
-                    <p>Use a chave abaixo:</p>
-                    <div class="pix-key">Chave Pix (E-mail):<br><strong>fernandesdavizin8@gmail.com</strong></div>
-                    <p class="amount-display">Valor: <span id="pix-amount">R$ 0,00</span></p>
-                    <button class="confirm-btn" onclick="confirmPayment()">Já realizei o pagamento</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal Admin (Liberar Créditos) -->
-        <div id="admin-modal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeAdminModal()">&times;</span>
-                <h2>Painel do Proprietário</h2>
-                
-                <div class="admin-stats-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; margin-top: 20px;">
-                    <div style="background: #0f1117; padding: 15px; border-radius: 12px; border: 1px solid #2d3748; text-align: center;">
-                        <i class="fas fa-users" style="color: #3b82f6; font-size: 1.5rem; margin-bottom: 10px;"></i>
-                        <h4 style="color: #94a3b8; font-size: 0.8rem; text-transform: uppercase;">Total de Acessos</h4>
-                        <p id="stats-total-views" style="font-size: 1.8rem; font-weight: bold; color: white;">0</p>
-                    </div>
-                    <div style="background: #0f1117; padding: 15px; border-radius: 12px; border: 1px solid #2d3748; text-align: center;">
-                        <i class="fas fa-magic" style="color: #10b981; font-size: 1.5rem; margin-bottom: 10px;"></i>
-                        <h4 style="color: #94a3b8; font-size: 0.8rem; text-transform: uppercase;">Scripts Gerados</h4>
-                        <p id="stats-total-scripts" style="font-size: 1.8rem; font-weight: bold; color: white;">0</p>
-                    </div>
-                </div>
-
-                <hr style="border: 0; border-top: 1px solid #2d3748; margin-bottom: 20px;">
-
-                <h3>Gerenciar Créditos</h3>
-                <p style="color: var(--text-muted); margin-bottom: 10px;">Libere créditos para seus clientes aqui.</p>
-                <div class="admin-input-group">
-                    <input type="email" id="admin-target-email" placeholder="E-mail do Cliente">
-                    <input type="number" id="admin-amount" placeholder="Quantidade de Créditos">
-                    <button class="admin-btn" onclick="releaseCredits()">Liberar Créditos Agora</button>
-                </div>
-            </div>
-        </div>
-
-        <div id="course-modal" class="modal">
-            <div class="modal-content" style="max-width: 800px; padding: 0; overflow: hidden; border: 1px solid rgba(251, 191, 36, 0.3);">
-                <div style="width: 100%; height: 200px; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; position: relative;">
-                    <span class="close" onclick="closeCourseModal()" style="position: absolute; top: 15px; right: 20px; color: white; opacity: 0.8;">&times;</span>
-                    <div style="text-align: center;">
-                        <i class="fas fa-graduation-cap" style="font-size: 3rem; color: #fbbf24; margin-bottom: 10px;"></i>
-                        <h2 style="color: white; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">Curso: Start Base FiveM</h2>
-                    </div>
-                </div>
-                
-                <div style="padding: 30px;">
-                    <p style="color: #94a3b8; margin-bottom: 20px;">Parabéns por se tornar VIP! Aqui está o guia essencial para dominar sua base.</p>
-                    
-                    <div class="course-content" style="text-align: left; background: #0f1117; padding: 25px; border-radius: 12px; border: 1px solid #2d3748; line-height: 1.6; max-height: 400px; overflow-y: auto;">
-                        <h3 style="color: #fbbf24; border-bottom: 1px solid #2d3748; padding-bottom: 10px;">🚀 Passo 1: Como Startar sua Base</h3>
-                        <p style="color: #cbd5e1; margin-bottom: 15px;">
-                            1. Baixe os artefatos do FiveM e sua base (vRP/Creative).<br>
-                            2. Configure o arquivo <code style="color: #fbbf24;">server.cfg</code>: coloque sua <b>License Key</b> e o <b>Steam API Key</b>.<br>
-                            3. Para ligar, execute o <code style="color: #fbbf24;">run.bat</code> ou <code style="color: #fbbf24;">start.bat</code>.<br>
-                            4. <b>Importante:</b> Verifique se o banco de dados (MySQL/HeidiSQL) está ligado antes de abrir o servidor.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="master-course-modal" class="modal">
-            <div class="modal-content" style="max-width: 900px; padding: 0; overflow: hidden; border: 1px solid rgba(168, 85, 247, 0.3);">
-                <div style="width: 100%; height: 250px; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1587620962725-abab7fe55159?auto=format&fit=crop&q=80&w=900'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; position: relative;">
-                    <span class="close" onclick="closeMasterCourseModal()" style="position: absolute; top: 15px; right: 20px; color: white; opacity: 0.8;">&times;</span>
-                    <div style="text-align: center;">
-                        <i class="fas fa-rocket" style="font-size: 3.5rem; color: #a855f7; margin-bottom: 10px;"></i>
-                        <h2 style="color: white; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">Curso Master: Programação Completa</h2>
-                        <p style="color: #a855f7; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; margin-top: 5px;">Acesso Exclusivo Premium</p>
-                    </div>
-                </div>
-
-                <div style="padding: 30px;">
-                    <p style="color: #94a3b8; margin-bottom: 20px;">O guia definitivo para dominar absolutamente tudo na sua cidade.</p>
-                    
-                    <div class="course-content" style="text-align: left; background: #0f1117; padding: 25px; border-radius: 12px; border: 1px solid #2d3748; line-height: 1.6; max-height: 450px; overflow-y: auto;">
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                            <div style="background: rgba(168, 85, 247, 0.05); padding: 15px; border-radius: 10px; border: 1px solid rgba(168, 85, 247, 0.1);">
-                                <h3 style="color: #a855f7; border-bottom: 1px solid rgba(168, 85, 247, 0.2); padding-bottom: 10px; margin-top: 0;"><i class="fas fa-user-shield"></i> 1. Admin & Cargos</h3>
-                                <p style="color: #cbd5e1; font-size: 0.9rem;">Configure o <code style="color: #a855f7;">groups.lua</code>, crie cargos como Dono/Admin e aprenda comandos de setagem.</p>
-                            </div>
-                            <div style="background: rgba(168, 85, 247, 0.05); padding: 15px; border-radius: 10px; border: 1px solid rgba(168, 85, 247, 0.1);">
-                                <h3 style="color: #a855f7; border-bottom: 1px solid rgba(168, 85, 247, 0.2); padding-bottom: 10px; margin-top: 0;"><i class="fas fa-gun"></i> 2. Facções & Polícia</h3>
-                                <p style="color: #cbd5e1; font-size: 0.9rem;">Arsenais, baús de facção, blips no mapa e sistemas de craft avançados para sua cidade.</p>
-                            </div>
-                            <div style="background: rgba(168, 85, 247, 0.05); padding: 15px; border-radius: 10px; border: 1px solid rgba(168, 85, 247, 0.1);">
-                                <h3 style="color: #a855f7; border-bottom: 1px solid rgba(168, 85, 247, 0.2); padding-bottom: 10px; margin-top: 0;"><i class="fas fa-car"></i> 3. Carros & Mapas</h3>
-                                <p style="color: #cbd5e1; font-size: 0.9rem;">Instalação de carros reais, peds customizados e interiores (MLOs) otimizados.</p>
-                            </div>
-                            <div style="background: rgba(168, 85, 247, 0.05); padding: 15px; border-radius: 10px; border: 1px solid rgba(168, 85, 247, 0.1);">
-                                <h3 style="color: #a855f7; border-bottom: 1px solid rgba(168, 85, 247, 0.2); padding-bottom: 10px; margin-top: 0;"><i class="fas fa-code"></i> 4. IA Avançada</h3>
-                                <p style="color: #cbd5e1; font-size: 0.9rem;">Crie interfaces (NUI) com HTML/CSS e peça scripts complexos para a Vida IA.</p>
-                            </div>
-                        </div>
-
-                        <h3 style="color: #a855f7; border-bottom: 1px solid #2d3748; padding-bottom: 10px; margin-top: 20px;">📖 Guia Passo a Passo:</h3>
-                        <p style="color: #cbd5e1; margin-bottom: 15px;">
-                            <b>1. Como colocar Polícia/Favelas:</b><br>
-                            Vá na pasta <code style="color: #a855f7;">cfg/groups.lua</code> e defina as permissões. Use a Vida IA para gerar o script de arsenal e vincule-o ao grupo da polícia.<br><br>
-                            <b>2. Como colocar Mapas e Carros:</b><br>
-                            Sempre use a pasta <code style="color: #a855f7;">stream</code>. Carros precisam de <code style="color: #a855f7;">.ytd</code> e <code style="color: #a855f7;">.yft</code>. Mapas usam <code style="color: #a855f7;">.ymap</code>. Ative tudo no <code style="color: #a855f7;">server.cfg</code>.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-            </div>
-        </div>
-
         <!-- Main Content -->
-        <main class="main-content">
-            <header class="top-bar">
-                <div class="server-info">
+        <main class="main-content" style="flex: 1; display: flex; flex-direction: column; background: #0f1117;">
+            <header class="top-bar" style="height: 70px; background: #161922; border-bottom: 1px solid #2d3748; display: flex; align-items: center; justify-content: space-between; padding: 0 24px;">
+                <div class="server-info" style="color: #10b981; display: flex; align-items: center; gap: 10px;">
                     <i class="fas fa-server"></i>
                     <span id="connected-server">Nenhum servidor conectado</span>
                 </div>
-                <div class="user-profile">
-                    <span>Admin</span>
-                    <img src="https://ui-avatars.com/api/?name=Admin&background=0D8ABC&color=fff" alt="User">
+                <div class="user-profile" style="display: flex; align-items: center; gap: 12px;">
+                    <span style="color: white; font-weight: 600;">Admin</span>
+                    <img src="https://ui-avatars.com/api/?name=Admin&background=0D8ABC&color=fff" alt="User" style="width: 36px; height: 36px; border-radius: 10px;">
                 </div>
             </header>
 
-            <div class="content-wrapper">
-                <div class="chat-section">
-                    <div class="chat-area" id="chat-area">
-                        <div class="welcome-message">
-                            <i class="fas fa-bolt main-bolt"></i>
-                            <h1>Vida IA</h1>
-                            <p>Bem-vindo à nova era do FiveM. Potencialize seu servidor com inteligência real.</p>
-                            <div class="quick-actions">
-                                <div class="action-card" onclick="startCreateScript()">
-                                    <i class="fas fa-code"></i>
-                                    <h3>Criar Script</h3>
-                                    <p>Gere arquivos direto na pasta resources</p>
-                                </div>
-                                <div class="action-card" onclick="startBugFix()">
-                                    <i class="fas fa-wrench"></i>
-                                    <h3>Corrigir Erro</h3>
-                                    <p>Analise erros do F8 e corrija na hora</p>
-                                </div>
-                            </div>
+            <div class="content-wrapper" style="display: flex; flex: 1; overflow: hidden;">
+                <div class="chat-section" style="flex: 1; display: flex; flex-direction: column; border-right: 1px solid #2d3748;">
+                    <div class="chat-area" id="chat-area" style="flex: 1; overflow-y: auto; padding: 32px; display: flex; flex-direction: column; gap: 20px;">
+                        <div class="welcome-message" style="text-align: center; margin: auto; max-width: 500px;">
+                            <i class="fas fa-bolt" style="font-size: 3rem; color: #3b82f6; margin-bottom: 20px;"></i>
+                            <h1 style="color: white; margin-bottom: 10px;">Vida IA</h1>
+                            <p style="color: #94a3b8;">Pronto para construir o futuro do seu FiveM?</p>
                         </div>
                     </div>
 
-                    <footer class="input-area">
-                        <div class="input-wrapper" style="padding: 20px; background: #161922; border-top: 1px solid #2d3748; display: flex; gap: 10px;">
-                            <input type="text" id="user-input" placeholder="O que vamos construir hoje?" style="flex: 1; background: #0f1117; border: 1px solid #2d3748; color: white; padding: 12px; border-radius: 8px; outline: none;">
-                            <button id="send-btn" style="background: #3b82f6; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer;"><i class="fas fa-paper-plane"></i></button>
+                    <footer class="input-area" style="padding: 24px; background: #161922; border-top: 1px solid #2d3748;">
+                        <div class="input-wrapper" style="display: flex; gap: 12px; background: #0f1117; padding: 12px 16px; border-radius: 12px; border: 1px solid #2d3748;">
+                            <input type="text" id="user-input" placeholder="O que vamos construir hoje?" style="flex: 1; background: transparent; border: none; color: white; outline: none; font-size: 1rem;">
+                            <button id="send-btn" style="background: #3b82f6; color: white; border: none; width: 40px; height: 40px; border-radius: 8px; cursor: pointer;">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
                         </div>
                     </footer>
                 </div>
 
-                <aside class="files-panel">
-                    <div class="panel-header">
+                <aside class="files-panel" style="width: 300px; background: #0a0c12; padding: 24px; display: flex; flex-direction: column;">
+                    <div class="panel-header" style="color: #94a3b8; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
                         <i class="fas fa-folder-tree"></i>
                         <span>Arquivos Alterados</span>
                     </div>
-                    <div class="files-list" id="files-list">
-                        <p class="empty-files">Nenhuma alteração aplicada ainda.</p>
+                    <div class="files-list" id="files-list" style="flex: 1; overflow-y: auto;">
+                        <p class="empty-files" style="color: #475569; font-size: 0.9rem;">Nenhuma alteração ainda.</p>
                     </div>
-                    <div class="panel-footer">
-                        <button class="restart-btn" onclick="simulateRestart()">
-                            <i class="fas fa-sync"></i> Dar Restart no Servidor
+                    <div class="panel-footer" style="margin-top: 20px;">
+                        <button class="restart-btn" onclick="simulateRestart()" style="width: 100%; padding: 12px; background: #7c3aed; color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: bold;">
+                            <i class="fas fa-sync"></i> Restart Servidor
                         </button>
                     </div>
                 </aside>
             </div>
         </main>
+    </div>
+
+    <!-- Modais (Fora do container principal para não quebrar o flexbox) -->
+    <div id="credits-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCreditsModal()">&times;</span>
+            <h2>Planos Premium - Vida IA</h2>
+            <p style="color: var(--text-muted); margin-bottom: 20px;">Escolha o poder computacional ideal para o seu servidor.</p>
+            <div class="plans-container">
+                <div class="plan-card">
+                    <div class="plan-badge" style="background: #475569;">STARTER</div>
+                    <h3>Plano Bronze</h3>
+                    <p class="price">R$ 29,90</p>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check" style="color: #10b981;"></i> 50 Créditos</li>
+                        <li><i class="fas fa-check" style="color: #10b981;"></i> Scripts vRP</li>
+                    </ul>
+                    <button onclick="buyPlan('Bronze', 29.90, 50)">Selecionar</button>
+                </div>
+                <div class="plan-card" style="border: 2px solid #fbbf24;">
+                    <div class="plan-badge" style="background: #fbbf24; color: #000;">START BASE</div>
+                    <h3 style="color: #fbbf24;">Plano VIP</h3>
+                    <p class="price" style="color: #fbbf24;">R$ 50,00</p>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check" style="color: #fbbf24;"></i> 100 Créditos</li>
+                        <li style="color: #fbbf24; font-weight: bold;"><i class="fas fa-graduation-cap"></i> Curso: Start Base</li>
+                    </ul>
+                    <button onclick="buyPlan('VIP', 50.00, 100)" style="background: #fbbf24; color: #000;">Comprar Agora</button>
+                </div>
+                <div class="plan-card" style="border: 2px solid #a855f7;">
+                    <div class="plan-badge" style="background: #a855f7;">MASTER PROG</div>
+                    <h3 style="color: #a855f7;">Plano Master</h3>
+                    <p class="price" style="color: #a855f7;">R$ 99,90</p>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check" style="color: #a855f7;"></i> 500 Créditos</li>
+                        <li style="color: #a855f7; font-weight: bold;"><i class="fas fa-rocket"></i> Programação Completa</li>
+                    </ul>
+                    <button onclick="buyPlan('Master', 99.90, 500)" style="background: #a855f7;">Comprar Master</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="pix-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closePixModal()">&times;</span>
+            <h2>Pagamento via Pix</h2>
+            <div class="pix-details">
+                <p>Use a chave abaixo:</p>
+                <div class="pix-key">Chave Pix (E-mail):<br><strong>fernandesdavizin8@gmail.com</strong></div>
+                <p class="amount-display">Valor: <span id="pix-amount">R$ 0,00</span></p>
+                <button class="confirm-btn" onclick="confirmPayment()">Já realizei o pagamento</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="admin-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAdminModal()">&times;</span>
+            <h2>Painel do Proprietário</h2>
+            <div class="admin-stats-grid">
+                <div style="background: #0f1117; padding: 15px; border-radius: 12px; border: 1px solid #2d3748; text-align: center;">
+                    <i class="fas fa-users" style="color: #3b82f6; font-size: 1.5rem; margin-bottom: 10px;"></i>
+                    <h4 style="color: #94a3b8; font-size: 0.8rem;">Total de Acessos</h4>
+                    <p id="stats-total-views" style="font-size: 1.8rem; font-weight: bold;">0</p>
+                </div>
+                <div style="background: #0f1117; padding: 15px; border-radius: 12px; border: 1px solid #2d3748; text-align: center;">
+                    <i class="fas fa-magic" style="color: #10b981; font-size: 1.5rem; margin-bottom: 10px;"></i>
+                    <h4 style="color: #94a3b8; font-size: 0.8rem;">Scripts Gerados</h4>
+                    <p id="stats-total-scripts" style="font-size: 1.8rem; font-weight: bold;">0</p>
+                </div>
+            </div>
+            <hr style="border: 0; border-top: 1px solid #2d3748; margin: 20px 0;">
+            <h3>Gerenciar Créditos</h3>
+            <div class="admin-input-group">
+                <input type="email" id="admin-target-email" placeholder="E-mail do Cliente">
+                <input type="number" id="admin-amount" placeholder="Quantidade de Créditos">
+                <button class="admin-btn" onclick="releaseCredits()">Liberar Créditos Agora</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="course-modal" class="modal">
+        <div class="modal-content" style="max-width: 850px; padding: 0; overflow: hidden; border: 1px solid rgba(251, 191, 36, 0.3);">
+            <div style="width: 100%; height: 200px; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; position: relative;">
+                <span class="close" onclick="closeCourseModal()" style="position: absolute; top: 15px; right: 20px; color: white; font-size: 2rem; opacity: 0.8; z-index: 10;">&times;</span>
+                <div style="text-align: center;">
+                    <i class="fas fa-graduation-cap" style="font-size: 3.5rem; color: #fbbf24; margin-bottom: 10px;"></i>
+                    <h2 style="color: white; margin: 0; text-transform: uppercase; letter-spacing: 2px;">Curso: Start Base FiveM</h2>
+                </div>
+            </div>
+            <div style="padding: 30px; background: #161922; max-height: 500px; overflow-y: auto;">
+                <div class="step-guide">
+                    <h3 style="color: #fbbf24; margin-bottom: 15px;"><i class="fas fa-play-circle"></i> 1. Como Startar sua Base (Do zero)</h3>
+                    <div style="background: #0f1117; padding: 20px; border-radius: 12px; border: 1px solid #2d3748; margin-bottom: 25px;">
+                        <p style="color: #cbd5e1; line-height: 1.6;">
+                            <b>A) Artefatos:</b> Baixe a versão mais recente dos artefatos do FiveM e coloque na pasta <code style="color: #fbbf24;">artifacts</code>.<br>
+                            <b>B) A Base:</b> Extraia os arquivos da sua base (vRP ou Creative) na pasta principal.<br>
+                            <b>C) Banco de Dados:</b> Abra o XAMPP ou HeidiSQL, crie uma database e importe o arquivo <code style="color: #fbbf24;">.sql</code> que vem na base.<br>
+                            <b>D) Server.cfg:</b> Abra o arquivo com o VS Code e coloque sua <b>License Key</b> (gerada no Keymaster) e sua <b>Steam API Key</b>.<br>
+                            <b>E) Ligar:</b> Clique duas vezes no <code style="color: #fbbf24;">run.bat</code> ou <code style="color: #fbbf24;">start.bat</code>. Se o console ficar verde, deu certo!
+                        </p>
+                    </div>
+
+                    <h3 style="color: #fbbf24; margin-bottom: 15px;"><i class="fas fa-plus-square"></i> 2. Como Adicionar Novos Scripts</h3>
+                    <div style="background: #0f1117; padding: 20px; border-radius: 12px; border: 1px solid #2d3748; margin-bottom: 25px;">
+                        <p style="color: #cbd5e1; line-height: 1.6;">
+                            1. Pegue a pasta do script que você baixou (ou gerou aqui na Vida IA).<br>
+                            2. Coloque ela dentro da pasta <code style="color: #fbbf24;">resources</code> do seu servidor.<br>
+                            3. Abra o seu <code style="color: #fbbf24;">server.cfg</code> e adicione a linha: <code style="color: #fbbf24;">ensure nome_do_script</code>.<br>
+                            4. Dê um <b>restart</b> no servidor ou digite <code style="color: #fbbf24;">refresh</code> e <code style="color: #fbbf24;">start nome_do_script</code> no console do F8.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="master-course-modal" class="modal">
+        <div class="modal-content" style="max-width: 900px; padding: 0; overflow: hidden; border: 1px solid rgba(168, 85, 247, 0.3);">
+            <div style="width: 100%; height: 250px; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1587620962725-abab7fe55159?auto=format&fit=crop&q=80&w=900'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; position: relative;">
+                <span class="close" onclick="closeMasterCourseModal()" style="position: absolute; top: 15px; right: 20px; color: white; font-size: 2rem; opacity: 0.8; z-index: 10;">&times;</span>
+                <div style="text-align: center;">
+                    <i class="fas fa-rocket" style="font-size: 4rem; color: #a855f7; margin-bottom: 10px;"></i>
+                    <h2 style="color: white; margin: 0; text-transform: uppercase; letter-spacing: 3px;">Mestre em Programação FiveM</h2>
+                </div>
+            </div>
+            <div style="padding: 30px; background: #161922; max-height: 550px; overflow-y: auto;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
+                    <div style="background: #0f1117; padding: 20px; border-radius: 12px; border: 1px solid rgba(168, 85, 247, 0.2);">
+                        <h3 style="color: #a855f7; margin-bottom: 10px;"><i class="fas fa-map-marked-alt"></i> Como Colocar Mapas</h3>
+                        <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.5;">
+                            1. Mapas usam arquivos <code style="color: #a855f7;">.ymap</code>.<br>
+                            2. Crie uma pasta (ex: <code style="color: #a855f7;">meu_mapa</code>).<br>
+                            3. Dentro dela, crie uma pasta chamada <code style="color: #a855f7;">stream</code>.<br>
+                            4. Jogue o <code style="color: #a855f7;">.ymap</code> dentro da <code style="color: #a855f7;">stream</code>.<br>
+                            5. Crie um <code style="color: #a855f7;">fxmanifest.lua</code> básico na pasta do mapa e dê ensure no cfg.
+                        </p>
+                    </div>
+                    <div style="background: #0f1117; padding: 20px; border-radius: 12px; border: 1px solid rgba(168, 85, 247, 0.2);">
+                        <h3 style="color: #a855f7; margin-bottom: 10px;"><i class="fas fa-car"></i> Como Adicionar Carros</h3>
+                        <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.5;">
+                            1. Carros Add-on vêm com <code style="color: #a855f7;">.ytd</code> e <code style="color: #a855f7;">.yft</code>.<br>
+                            2. Coloque esses arquivos na pasta <code style="color: #a855f7;">stream</code> do seu script de carro.<br>
+                            3. Os arquivos de configuração (<code style="color: #a855f7;">handling.meta</code>, <code style="color: #a855f7;">vehicles.meta</code>) ficam na pasta principal do script.<br>
+                            4. Certifique-se de que o nome da pasta do carro é o mesmo que você usará para spawnar.
+                        </p>
+                    </div>
+                </div>
+
+                <div style="background: linear-gradient(to right, rgba(168, 85, 247, 0.1), transparent); padding: 25px; border-radius: 12px; border-left: 4px solid #a855f7;">
+                    <h3 style="color: #a855f7; margin-bottom: 10px;"><i class="fas fa-user-shield"></i> Setar ADM e Grupos</h3>
+                    <p style="color: #cbd5e1; line-height: 1.6;">
+                        Para se setar como dono, você deve ir no banco de dados, na tabela <code style="color: #a855f7;">vrp_users</code> (ou <code style="color: #a855f7;">users</code>) e encontrar seu ID. Depois, na tabela de grupos/permissões, adicione seu ID ao grupo 'Dono' ou 'Admin'.<br>
+                        <b>Dica:</b> No console do servidor, você também pode digitar: <code style="color: #a855f7;">addgroup ID Dono</code> (dependendo da sua base).
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>

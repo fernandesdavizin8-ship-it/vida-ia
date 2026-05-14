@@ -232,6 +232,33 @@ function updateAdminStats() {
 // Chamar contagem de acesso ao carregar
 trackPageView();
 
+// Verificar se já está logado
+document.addEventListener('DOMContentLoaded', () => {
+    const savedUser = localStorage.getItem('vida_ia_user');
+    if (savedUser) {
+        const user = JSON.parse(savedUser);
+        if (user.email === 'fernandesdavizin8@gmail.com') {
+            isOwner = true;
+            credits = Infinity;
+            document.getElementById('current-credits').textContent = '∞';
+            document.getElementById('user-role').textContent = 'Modo Owner Ativado';
+            const adminBtn = document.getElementById('admin-btn');
+            if (adminBtn) adminBtn.style.display = 'flex';
+        } else {
+            isOwner = false;
+            credits = user.credits || 5;
+            document.getElementById('current-credits').textContent = credits;
+            document.getElementById('user-role').textContent = 'Usuário Free';
+        }
+        
+        const overlay = document.getElementById('auth-overlay');
+        const container = document.getElementById('app-main');
+        if (overlay) overlay.style.display = 'none';
+        if (container) container.style.display = 'flex';
+        checkVipAccess();
+    }
+});
+
 // Torna a função global para o HTML encontrar
 window.handleAuth = function() {
     console.log("Iniciando processo de login...");
@@ -259,6 +286,7 @@ window.handleAuth = function() {
         isOwner = true;
         credits = Infinity;
         currentUser = { email: email, credits: Infinity };
+        localStorage.setItem('vida_ia_user', JSON.stringify(currentUser));
         document.getElementById('current-credits').textContent = '∞';
         document.getElementById('user-role').textContent = 'Modo Owner Ativado';
         const adminBtn = document.getElementById('admin-btn');
@@ -267,6 +295,7 @@ window.handleAuth = function() {
         isOwner = false;
         credits = 5;
         currentUser = { email: email, credits: 5 };
+        localStorage.setItem('vida_ia_user', JSON.stringify(currentUser));
         document.getElementById('current-credits').textContent = credits;
         document.getElementById('user-role').textContent = 'Usuário Free';
     }
