@@ -275,8 +275,8 @@ window.handleAuth = function() {
         if (adminBtn) adminBtn.style.display = 'flex';
     } else {
         isOwner = false;
-        credits = 5;
-        currentUser = { email: email, credits: 5 };
+        credits = 10; // Aumentado de 5 para 10 para novos usuários testarem mais
+        currentUser = { email: email, credits: 10 };
         localStorage.setItem('vida_ia_user', JSON.stringify(currentUser));
         document.getElementById('current-credits').textContent = credits;
         document.getElementById('user-role').textContent = 'Usuário Free';
@@ -472,19 +472,23 @@ function showChat() {
     updateActiveNav(0);
 }
 
-function startCreateScript() {
+window.startCreateScript = function() {
+    currentMode = 'create';
     const chatArea = document.getElementById('chat-area');
     chatArea.innerHTML = '';
-    addMessage("ai", "Opa! Vamos criar um script novo. O que você tem em mente? Descreva as funções que você quer (ex: um sistema de lavagem de dinheiro para vRP).");
+    addMessage('ai', '🛠️ **Modo Criador de Scripts Ativado!**\n\nDescreva o que você precisa (ex: "um sistema de lixeiro vRP" ou "um comando de adm para puxar carro"). Eu vou gerar o código completo para você!');
+    
     updateActiveNav(1);
-}
+};
 
-function startBugFix() {
+window.startBugFix = function() {
+    currentMode = 'fix';
     const chatArea = document.getElementById('chat-area');
     chatArea.innerHTML = '';
-    addMessage("ai", "Me manda o código que está dando erro e, se possível, o erro que aparece no console do F8 ou do servidor.");
+    addMessage('ai', '🔧 **Modo Correção de Erros Ativado!**\n\nCole aqui o código que está dando erro ou o log que aparece no seu console (F8). Eu vou analisar e te enviar a versão corrigida.');
+    
     updateActiveNav(2);
-}
+};
 
 function startUploadBase() {
     document.getElementById('base-upload').click();
