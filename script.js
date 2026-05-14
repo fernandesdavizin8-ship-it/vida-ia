@@ -232,31 +232,13 @@ function updateAdminStats() {
 // Chamar contagem de acesso ao carregar
 trackPageView();
 
-// Verificar se já está logado
+// Removido auto-login para forçar senha sempre que entrar
 document.addEventListener('DOMContentLoaded', () => {
-    const savedUser = localStorage.getItem('vida_ia_user');
-    if (savedUser) {
-        const user = JSON.parse(savedUser);
-        if (user.email === 'fernandesdavizin8@gmail.com') {
-            isOwner = true;
-            credits = Infinity;
-            document.getElementById('current-credits').textContent = '∞';
-            document.getElementById('user-role').textContent = 'Modo Owner Ativado';
-            const adminBtn = document.getElementById('admin-btn');
-            if (adminBtn) adminBtn.style.display = 'flex';
-        } else {
-            isOwner = false;
-            credits = user.credits || 5;
-            document.getElementById('current-credits').textContent = credits;
-            document.getElementById('user-role').textContent = 'Usuário Free';
-        }
-        
-        const overlay = document.getElementById('auth-overlay');
-        const container = document.getElementById('app-main');
-        if (overlay) overlay.style.display = 'none';
-        if (container) container.style.display = 'flex';
-        checkVipAccess();
-    }
+    // Apenas garante que o overlay está visível se não houver sessão ativa
+    const overlay = document.getElementById('auth-overlay');
+    const container = document.getElementById('app-main');
+    if (overlay) overlay.style.display = 'flex';
+    if (container) container.style.display = 'none';
 });
 
 // Torna a função global para o HTML encontrar
@@ -314,6 +296,11 @@ window.handleAuth = function() {
     
     checkVipAccess(); // Checar acesso ao curso logo após o login
     console.log("Login concluído com sucesso!");
+};
+
+window.handleLogout = function() {
+    localStorage.removeItem('vida_ia_user');
+    window.location.reload(); // Recarrega a página para voltar ao login
 };
 
 // Adicionar o evento de clique e de Enter manualmente para garantir
