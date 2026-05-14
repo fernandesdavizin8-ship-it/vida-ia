@@ -9,29 +9,40 @@
 </head>
 <body>
     <!-- Overlay de Login Simplificado ao Máximo -->
-    <div id="auth-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #1a1d24; z-index: 99999; display: flex; align-items: center; justify-content: center;">
-        <div style="background: #232731; padding: 40px; border-radius: 20px; border: 1px solid #374151; width: 400px; text-align: center;">
-            <div style="color: #60a5fa; font-size: 2rem; margin-bottom: 20px; font-weight: bold;">
-                <i class="fas fa-bolt"></i> Vida IA
+        <div id="auth-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%); z-index: 99999; display: flex; align-items: center; justify-content: center;">
+            <div style="background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); padding: 50px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.1); width: 450px; text-align: center; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);">
+                <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #3b82f6, #7c3aed); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px; box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);">
+                    <i class="fas fa-bolt" style="color: white; font-size: 2.5rem;"></i>
+                </div>
+                <h1 style="color: white; font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; letter-spacing: -1px;">Vida IA</h1>
+                <p style="color: #94a3b8; margin-bottom: 35px; font-size: 1.1rem;">A inteligência artificial que constrói o seu servidor FiveM.</p>
+                
+                <div style="text-align: left; margin-bottom: 25px;">
+                    <label style="color: #cbd5e1; font-size: 0.9rem; margin-bottom: 8px; display: block; font-weight: 500;">E-mail de acesso</label>
+                    <input type="email" id="auth-email" placeholder="exemplo@email.com" style="width: 100%; padding: 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: rgba(15, 23, 42, 0.6); color: white; outline: none; transition: border-color 0.3s;">
+                </div>
+                
+                <div style="text-align: left; margin-bottom: 30px;">
+                    <label style="color: #cbd5e1; font-size: 0.9rem; margin-bottom: 8px; display: block; font-weight: 500;">Senha secreta</label>
+                    <input type="password" id="auth-password" placeholder="••••••••" style="width: 100%; padding: 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: rgba(15, 23, 42, 0.6); color: white; outline: none; transition: border-color 0.3s;">
+                </div>
+                
+                <button onclick="handleAuth()" id="login-button" style="width: 100%; padding: 16px; background: linear-gradient(to right, #3b82f6, #2563eb); color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);">
+                    Entrar no Painel
+                </button>
+                
+                <p style="color: #64748b; font-size: 0.85rem; margin-top: 25px;">Ao entrar, você concorda com nossos termos de uso.</p>
             </div>
-            <h2 style="color: white; margin-bottom: 10px;">Bem-vindo ao Futuro</h2>
-            <p style="color: #94a3b8; margin-bottom: 30px;">Entre com seu e-mail para começar.</p>
-            
-            <input type="email" id="auth-email" placeholder="Seu e-mail" style="width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #2d3748; background: #0f1117; color: white;">
-            <input type="password" id="auth-password" placeholder="Sua senha" style="width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #2d3748; background: #0f1117; color: white;">
-            
-            <button onclick="handleAuth()" id="login-button" style="width: 100%; padding: 15px; background: #10b981; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">
-                Entrar / Cadastrar
-            </button>
         </div>
-    </div>
 
     <div class="app-container" id="app-main" style="display: none;">
         <!-- Sidebar -->
         <aside class="sidebar">
-            <div class="logo">
-                <i class="fas fa-bolt"></i>
-                <span>Vida IA</span>
+            <div class="logo" style="display: flex; align-items: center; gap: 12px; padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.05); margin-bottom: 20px;">
+                <div style="width: 45px; height: 45px; background: linear-gradient(135deg, #3b82f6, #7c3aed); border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);">
+                    <i class="fas fa-bolt" style="color: white; font-size: 1.5rem;"></i>
+                </div>
+                <span style="font-size: 1.4rem; font-weight: 800; letter-spacing: -0.5px; background: linear-gradient(to right, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Vida IA</span>
             </div>
             <nav class="nav-menu">
                 <div class="nav-item active" onclick="showChat()"><i class="fas fa-comments"></i> Chat</div>
@@ -61,50 +72,41 @@
                 <span class="close" onclick="closeCreditsModal()">&times;</span>
                 <h2>Planos Premium - Vida IA</h2>
                 <p style="color: var(--text-muted); margin-bottom: 20px;">Escolha o poder computacional ideal para o seu servidor.</p>
-                <div class="plans-container">
-                    <div class="plan-card">
-                        <div class="plan-badge">STARTER</div>
-                        <h3>Plano Bronze</h3>
-                        <p class="price">R$ 29,90</p>
-                        <ul class="plan-features">
-                            <li><i class="fas fa-check"></i> 50 Créditos</li>
-                            <li><i class="fas fa-check"></i> Scripts vRP Básicos</li>
-                            <li><i class="fas fa-check"></i> Suporte via Discord</li>
+                <div class="plans-container" style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 30px;">
+                    <div class="plan-card" style="background: #1e293b; padding: 25px; border-radius: 16px; width: 280px; border: 1px solid #334155; transition: transform 0.3s; position: relative;">
+                        <div class="plan-badge" style="position: absolute; top: -12px; right: 20px; background: #475569; padding: 5px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: bold; color: white;">STARTER</div>
+                        <h3 style="margin-top: 10px;">Plano Bronze</h3>
+                        <p class="price" style="font-size: 2rem; font-weight: bold; margin: 15px 0;">R$ 29,90</p>
+                        <ul class="plan-features" style="list-style: none; padding: 0; margin-bottom: 25px; text-align: left; font-size: 0.9rem;">
+                            <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: #10b981; margin-right: 8px;"></i> 50 Créditos</li>
+                            <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: #10b981; margin-right: 8px;"></i> Scripts vRP Básicos</li>
+                            <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: #10b981; margin-right: 8px;"></i> Suporte Discord</li>
                         </ul>
-                        <button onclick="buyPlan('Bronze', 29.90, 50)">Selecionar Plano</button>
+                        <button onclick="buyPlan('Bronze', 29.90, 50)" style="width: 100%; padding: 12px; border-radius: 8px; border: none; background: #3b82f6; color: white; font-weight: bold; cursor: pointer;">Selecionar</button>
                     </div>
-                    <div class="plan-card featured">
-                        <div class="plan-badge blue">MOST POPULAR</div>
-                        <h3>Plano Prata</h3>
-                        <p class="price">R$ 59,90</p>
-                        <ul class="plan-features">
-                            <li><i class="fas fa-check"></i> 150 Créditos</li>
-                            <li><i class="fas fa-check"></i> Scripts vRP Avançados</li>
-                            <li><i class="fas fa-check"></i> Prioridade na Fila</li>
+
+                    <div class="plan-card" style="background: #1e293b; padding: 25px; border-radius: 16px; width: 300px; border: 2px solid #fbbf24; transform: scale(1.05); position: relative; box-shadow: 0 10px 25px -5px rgba(251, 191, 36, 0.2);">
+                        <div class="plan-badge" style="position: absolute; top: -12px; right: 20px; background: #fbbf24; padding: 5px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: bold; color: #000;">START BASE</div>
+                        <h3 style="margin-top: 10px;">Plano VIP</h3>
+                        <p class="price" style="font-size: 2.2rem; font-weight: bold; margin: 15px 0; color: #fbbf24;">R$ 50,00</p>
+                        <ul class="plan-features" style="list-style: none; padding: 0; margin-bottom: 25px; text-align: left; font-size: 0.9rem;">
+                            <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: #fbbf24; margin-right: 8px;"></i> 100 Créditos</li>
+                            <li style="margin-bottom: 10px; color: #fbbf24; font-weight: bold;"><i class="fas fa-graduation-cap" style="margin-right: 8px;"></i> Curso: Start Base</li>
+                            <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: #fbbf24; margin-right: 8px;"></i> Suporte Prioritário</li>
                         </ul>
-                        <button onclick="buyPlan('Prata', 59.90, 150)">Selecionar Plano</button>
+                        <button onclick="buyPlan('VIP', 50.00, 100)" style="width: 100%; padding: 15px; border-radius: 8px; border: none; background: #fbbf24; color: #000; font-weight: bold; cursor: pointer;">Comprar Agora</button>
                     </div>
-                    <div class="plan-card" style="border: 2px solid #fbbf24; position: relative;">
-                        <div class="plan-badge" style="background: #fbbf24; color: #000;">START BASE</div>
-                        <h3>Plano VIP</h3>
-                        <p class="price">R$ 50,00</p>
-                        <ul class="plan-features">
-                            <li><i class="fas fa-check"></i> 100 Créditos</li>
-                            <li><i class="fas fa-graduation-cap" style="color: #fbbf24;"></i> <b>Curso: Como Startar Base</b></li>
-                            <li><i class="fas fa-check"></i> Suporte Prioritário</li>
+
+                    <div class="plan-card" style="background: #1e293b; padding: 25px; border-radius: 16px; width: 300px; border: 2px solid #a855f7; position: relative; box-shadow: 0 10px 25px -5px rgba(168, 85, 247, 0.2);">
+                        <div class="plan-badge" style="position: absolute; top: -12px; right: 20px; background: #a855f7; padding: 5px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: bold; color: white;">MASTER PROG</div>
+                        <h3 style="margin-top: 10px;">Plano Master</h3>
+                        <p class="price" style="font-size: 2.2rem; font-weight: bold; margin: 15px 0; color: #a855f7;">R$ 99,90</p>
+                        <ul class="plan-features" style="list-style: none; padding: 0; margin-bottom: 25px; text-align: left; font-size: 0.9rem;">
+                            <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: #a855f7; margin-right: 8px;"></i> 500 Créditos</li>
+                            <li style="margin-bottom: 10px; color: #a855f7; font-weight: bold;"><i class="fas fa-rocket" style="margin-right: 8px;"></i> Programação Completa</li>
+                            <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: #a855f7; margin-right: 8px;"></i> Suporte VIP 24h</li>
                         </ul>
-                        <button style="background: #fbbf24; color: #000;" onclick="buyPlan('VIP', 50.00, 100)">Comprar VIP</button>
-                    </div>
-                    <div class="plan-card featured" style="border: 2px solid #a855f7;">
-                        <div class="plan-badge" style="background: #a855f7;">MASTER PROGRAMAÇÃO</div>
-                        <h3>Plano Master</h3>
-                        <p class="price">R$ 99,90</p>
-                        <ul class="plan-features">
-                            <li><i class="fas fa-check"></i> 500 Créditos</li>
-                            <li><i class="fas fa-rocket" style="color: #a855f7;"></i> <b>Curso: Programação Completa</b></li>
-                            <li><i class="fas fa-check"></i> Suporte VIP 24h</li>
-                        </ul>
-                        <button style="background: #a855f7;" onclick="buyPlan('Master', 99.90, 500)">Comprar Master</button>
+                        <button onclick="buyPlan('Master', 99.90, 500)" style="width: 100%; padding: 15px; border-radius: 8px; border: none; background: #a855f7; color: white; font-weight: bold; cursor: pointer;">Comprar Master</button>
                     </div>
                 </div>
             </div>
@@ -155,53 +157,73 @@
         </div>
 
         <div id="course-modal" class="modal">
-            <div class="modal-content" style="max-width: 800px;">
-                <span class="close" onclick="closeCourseModal()">&times;</span>
-                <h2 style="color: #fbbf24;"><i class="fas fa-graduation-cap"></i> Curso: Como Programar sua Cidade FiveM</h2>
-                <p style="color: #94a3b8; margin-bottom: 20px;">Parabéns por se tornar VIP! Aqui está o guia essencial para dominar sua base.</p>
+            <div class="modal-content" style="max-width: 800px; padding: 0; overflow: hidden; border: 1px solid rgba(251, 191, 36, 0.3);">
+                <div style="width: 100%; height: 200px; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; position: relative;">
+                    <span class="close" onclick="closeCourseModal()" style="position: absolute; top: 15px; right: 20px; color: white; opacity: 0.8;">&times;</span>
+                    <div style="text-align: center;">
+                        <i class="fas fa-graduation-cap" style="font-size: 3rem; color: #fbbf24; margin-bottom: 10px;"></i>
+                        <h2 style="color: white; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">Curso: Start Base FiveM</h2>
+                    </div>
+                </div>
                 
-                <div class="course-content" style="text-align: left; background: #0f1117; padding: 25px; border-radius: 12px; border: 1px solid #2d3748; line-height: 1.6; max-height: 500px; overflow-y: auto;">
-                    <h3 style="color: #fbbf24; border-bottom: 1px solid #2d3748; padding-bottom: 10px;">🚀 Passo 1: Como Startar sua Base</h3>
-                    <p style="color: #cbd5e1; margin-bottom: 15px;">
-                        1. Baixe os artefatos do FiveM e sua base (vRP/Creative).<br>
-                        2. Configure o arquivo <code style="color: #fbbf24;">server.cfg</code>: coloque sua <b>License Key</b> e o <b>Steam API Key</b>.<br>
-                        3. Para ligar, execute o <code style="color: #fbbf24;">run.bat</code> ou <code style="color: #fbbf24;">start.bat</code>.<br>
-                        4. <b>Importante:</b> Verifique se o banco de dados (MySQL/HeidiSQL) está ligado antes de abrir o servidor.
-                    </p>
+                <div style="padding: 30px;">
+                    <p style="color: #94a3b8; margin-bottom: 20px;">Parabéns por se tornar VIP! Aqui está o guia essencial para dominar sua base.</p>
+                    
+                    <div class="course-content" style="text-align: left; background: #0f1117; padding: 25px; border-radius: 12px; border: 1px solid #2d3748; line-height: 1.6; max-height: 400px; overflow-y: auto;">
+                        <h3 style="color: #fbbf24; border-bottom: 1px solid #2d3748; padding-bottom: 10px;">🚀 Passo 1: Como Startar sua Base</h3>
+                        <p style="color: #cbd5e1; margin-bottom: 15px;">
+                            1. Baixe os artefatos do FiveM e sua base (vRP/Creative).<br>
+                            2. Configure o arquivo <code style="color: #fbbf24;">server.cfg</code>: coloque sua <b>License Key</b> e o <b>Steam API Key</b>.<br>
+                            3. Para ligar, execute o <code style="color: #fbbf24;">run.bat</code> ou <code style="color: #fbbf24;">start.bat</code>.<br>
+                            4. <b>Importante:</b> Verifique se o banco de dados (MySQL/HeidiSQL) está ligado antes de abrir o servidor.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div id="master-course-modal" class="modal">
-            <div class="modal-content" style="max-width: 900px;">
-                <span class="close" onclick="closeMasterCourseModal()">&times;</span>
-                <h2 style="color: #a855f7;"><i class="fas fa-rocket"></i> Curso Master: Programação Completa FiveM</h2>
-                <p style="color: #94a3b8; margin-bottom: 20px;">O guia definitivo para dominar absolutamente tudo na sua cidade.</p>
-                
-                <div class="course-content" style="text-align: left; background: #0f1117; padding: 25px; border-radius: 12px; border: 1px solid #2d3748; line-height: 1.6; max-height: 600px; overflow-y: auto;">
-                    <h3 style="color: #a855f7; border-bottom: 1px solid #2d3748; padding-bottom: 10px;">👑 1. Gestão de Cargos e Admin</h3>
-                    <p style="color: #cbd5e1; margin-bottom: 15px;">
-                        • <b>Setar ADM:</b> Como configurar o <code style="color: #a855f7;">groups.lua</code> e usar comandos como <code style="color: #a855f7;">/setgroup</code>.<br>
-                        • <b>Permissões:</b> Criando novos grupos (Dono, Admin, Mod, Suporte) e limitando o que cada um pode fazer.
-                    </p>
+            <div class="modal-content" style="max-width: 900px; padding: 0; overflow: hidden; border: 1px solid rgba(168, 85, 247, 0.3);">
+                <div style="width: 100%; height: 250px; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1587620962725-abab7fe55159?auto=format&fit=crop&q=80&w=900'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; position: relative;">
+                    <span class="close" onclick="closeMasterCourseModal()" style="position: absolute; top: 15px; right: 20px; color: white; opacity: 0.8;">&times;</span>
+                    <div style="text-align: center;">
+                        <i class="fas fa-rocket" style="font-size: 3.5rem; color: #a855f7; margin-bottom: 10px;"></i>
+                        <h2 style="color: white; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">Curso Master: Programação Completa</h2>
+                        <p style="color: #a855f7; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; margin-top: 5px;">Acesso Exclusivo Premium</p>
+                    </div>
+                </div>
 
-                    <h3 style="color: #a855f7; border-bottom: 1px solid #2d3748; padding-bottom: 10px; margin-top: 20px;">👮 2. Sistemas de Facções e Polícia</h3>
-                    <p style="color: #cbd5e1; margin-bottom: 15px;">
-                        • <b>Polícia:</b> Como configurar o arsenal, fardamento e o tablet de multas.<br>
-                        • <b>Favelas/Facs:</b> Criando baús exclusivos, blips no mapa e sistemas de craft de armas/drogas.
-                    </p>
+                <div style="padding: 30px;">
+                    <p style="color: #94a3b8; margin-bottom: 20px;">O guia definitivo para dominar absolutamente tudo na sua cidade.</p>
+                    
+                    <div class="course-content" style="text-align: left; background: #0f1117; padding: 25px; border-radius: 12px; border: 1px solid #2d3748; line-height: 1.6; max-height: 450px; overflow-y: auto;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div style="background: rgba(168, 85, 247, 0.05); padding: 15px; border-radius: 10px; border: 1px solid rgba(168, 85, 247, 0.1);">
+                                <h3 style="color: #a855f7; border-bottom: 1px solid rgba(168, 85, 247, 0.2); padding-bottom: 10px; margin-top: 0;"><i class="fas fa-user-shield"></i> 1. Admin & Cargos</h3>
+                                <p style="color: #cbd5e1; font-size: 0.9rem;">Configure o <code style="color: #a855f7;">groups.lua</code>, crie cargos como Dono/Admin e aprenda comandos de setagem.</p>
+                            </div>
+                            <div style="background: rgba(168, 85, 247, 0.05); padding: 15px; border-radius: 10px; border: 1px solid rgba(168, 85, 247, 0.1);">
+                                <h3 style="color: #a855f7; border-bottom: 1px solid rgba(168, 85, 247, 0.2); padding-bottom: 10px; margin-top: 0;"><i class="fas fa-gun"></i> 2. Facções & Polícia</h3>
+                                <p style="color: #cbd5e1; font-size: 0.9rem;">Arsenais, baús de facção, blips no mapa e sistemas de craft avançados para sua cidade.</p>
+                            </div>
+                            <div style="background: rgba(168, 85, 247, 0.05); padding: 15px; border-radius: 10px; border: 1px solid rgba(168, 85, 247, 0.1);">
+                                <h3 style="color: #a855f7; border-bottom: 1px solid rgba(168, 85, 247, 0.2); padding-bottom: 10px; margin-top: 0;"><i class="fas fa-car"></i> 3. Carros & Mapas</h3>
+                                <p style="color: #cbd5e1; font-size: 0.9rem;">Instalação de carros reais, peds customizados e interiores (MLOs) otimizados.</p>
+                            </div>
+                            <div style="background: rgba(168, 85, 247, 0.05); padding: 15px; border-radius: 10px; border: 1px solid rgba(168, 85, 247, 0.1);">
+                                <h3 style="color: #a855f7; border-bottom: 1px solid rgba(168, 85, 247, 0.2); padding-bottom: 10px; margin-top: 0;"><i class="fas fa-code"></i> 4. IA Avançada</h3>
+                                <p style="color: #cbd5e1; font-size: 0.9rem;">Crie interfaces (NUI) com HTML/CSS e peça scripts complexos para a Vida IA.</p>
+                            </div>
+                        </div>
 
-                    <h3 style="color: #a855f7; border-bottom: 1px solid #2d3748; padding-bottom: 10px; margin-top: 20px;">🚗 3. Veículos, Peds e Mapas</h3>
-                    <p style="color: #cbd5e1; margin-bottom: 15px;">
-                        • <b>Carros e Peds:</b> Como adicionar carros reais e peds customizados via stream.<br>
-                        • <b>Mapas:</b> Instalação de interiores (MLOs) e otimização para não dar queda de FPS.
-                    </p>
-
-                    <h3 style="color: #a855f7; border-bottom: 1px solid #2d3748; padding-bottom: 10px; margin-top: 20px;">🤖 4. Desenvolvimento Avançado com Vida IA</h3>
-                    <p style="color: #cbd5e1;">
-                        • Aprenda a pedir scripts complexos que conversam entre si.<br>
-                        • Como criar NUI (interfaces na tela) usando HTML/CSS dentro do FiveM.
-                    </p>
+                        <h3 style="color: #a855f7; border-bottom: 1px solid #2d3748; padding-bottom: 10px; margin-top: 20px;">📖 Guia Passo a Passo:</h3>
+                        <p style="color: #cbd5e1; margin-bottom: 15px;">
+                            <b>1. Como colocar Polícia/Favelas:</b><br>
+                            Vá na pasta <code style="color: #a855f7;">cfg/groups.lua</code> e defina as permissões. Use a Vida IA para gerar o script de arsenal e vincule-o ao grupo da polícia.<br><br>
+                            <b>2. Como colocar Mapas e Carros:</b><br>
+                            Sempre use a pasta <code style="color: #a855f7;">stream</code>. Carros precisam de <code style="color: #a855f7;">.ytd</code> e <code style="color: #a855f7;">.yft</code>. Mapas usam <code style="color: #a855f7;">.ymap</code>. Ative tudo no <code style="color: #a855f7;">server.cfg</code>.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
