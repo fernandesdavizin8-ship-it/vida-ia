@@ -24,30 +24,30 @@ async function generateFiveMScript(userPrompt) {
         };
     }
 
+    // Adicionar instrução de sistema baseada no modo
+    let systemPrompt = "Você é o 'Vida IA', o desenvolvedor de FiveM mais avançado do mundo. Sua especialidade é criar scripts complexos e otimizados para as bases vRP e Creative. ";
+    if (typeof currentMode !== 'undefined') {
+        if (currentMode === 'create') {
+            systemPrompt += "O usuário quer CRIAR um script funcional. Responda APENAS com um objeto JSON válido contendo as chaves: 'client', 'server', 'manifest'.";
+        } else if (currentMode === 'fix') {
+            systemPrompt += "O usuário quer CORRIGIR um erro. Analise o código/erro enviado e forneça a versão corrigida em um objeto JSON válido com as chaves: 'client', 'server', 'manifest'.";
+        }
+    }
+    
+    systemPrompt += `\nREGRAS:\n1. Responda APENAS com um objeto JSON válido.\n2. O JSON deve ter as chaves: "client", "server", "manifest".\n3. No manifest, use fx_version 'cerulean' e game 'gta5'.\n4. Se for vRP, use Tunnel/Proxy corretamente.\n5. Se for Creative, use os padrões da base (Summer/Creative v3).\n6. O código deve ser limpo, comentado em português e funcional.`;
+
     try {
         const response = await fetch('https://api.openai.com/v1/chat/completions', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json', 
                 'Authorization': `Bearer ${OPENAI_API_KEY}`
             },
             body: JSON.stringify({
-                model: "gpt-3.5-turbo", // Mudado para 3.5 para garantir acesso imediato
+                model: "gpt-3.5-turbo",
                 messages: [
-                    {
-                        role: "system",
-                        content: `Você é o 'Vida IA', o desenvolvedor de FiveM mais avançado do mundo. 
-                        Sua especialidade é criar scripts complexos e otimizados para as bases vRP e Creative.
-                        
-                        REGRAS:
-                        1. Responda APENAS com um objeto JSON válido.
-                        2. O JSON deve ter as chaves: "client", "server", "manifest".
-                        3. No manifest, use fx_version 'cerulean' e game 'gta5'.
-                        4. Se for vRP, use Tunnel/Proxy corretamente.
-                        5. Se for Creative, use os padrões da base (Summer/Creative v3).
-                        6. O código deve ser limpo, comentado em português e funcional.`
-                    },
-                    { role: "user", content: `Crie um script funcional para FiveM: ${userPrompt}` }
+                    { role: "system", content: systemPrompt },
+                    { role: "user", content: `Requisição FiveM: ${userPrompt}` }
                 ],
                 response_format: { type: "json_object" }
             })
