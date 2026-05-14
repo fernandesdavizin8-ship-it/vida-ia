@@ -72,41 +72,38 @@
                 <span class="close" onclick="closeCreditsModal()">&times;</span>
                 <h2>Planos Premium - Vida IA</h2>
                 <p style="color: var(--text-muted); margin-bottom: 20px;">Escolha o poder computacional ideal para o seu servidor.</p>
-                <div class="plans-container" style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 30px;">
-                    <div class="plan-card" style="background: #1e293b; padding: 25px; border-radius: 16px; width: 280px; border: 1px solid #334155; transition: transform 0.3s; position: relative;">
-                        <div class="plan-badge" style="position: absolute; top: -12px; right: 20px; background: #475569; padding: 5px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: bold; color: white;">STARTER</div>
-                        <h3 style="margin-top: 10px;">Plano Bronze</h3>
-                        <p class="price" style="font-size: 2rem; font-weight: bold; margin: 15px 0;">R$ 29,90</p>
-                        <ul class="plan-features" style="list-style: none; padding: 0; margin-bottom: 25px; text-align: left; font-size: 0.9rem;">
-                            <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: #10b981; margin-right: 8px;"></i> 50 Créditos</li>
-                            <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: #10b981; margin-right: 8px;"></i> Scripts vRP Básicos</li>
-                            <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: #10b981; margin-right: 8px;"></i> Suporte Discord</li>
+                <div class="plans-container" style="display: flex; gap: 20px; justify-content: center; flex-wrap: nowrap; margin-top: 30px; overflow-x: auto; padding: 10px;">
+                    <div class="plan-card" style="background: #1e293b; padding: 20px; border-radius: 16px; min-width: 240px; border: 1px solid #334155; transition: transform 0.3s; position: relative;">
+                        <div class="plan-badge" style="position: absolute; top: -12px; right: 15px; background: #475569; padding: 5px 10px; border-radius: 20px; font-size: 0.65rem; font-weight: bold; color: white;">STARTER</div>
+                        <h3 style="margin-top: 5px; font-size: 1.1rem;">Plano Bronze</h3>
+                        <p class="price" style="font-size: 1.8rem; font-weight: bold; margin: 10px 0;">R$ 29,90</p>
+                        <ul class="plan-features" style="list-style: none; padding: 0; margin-bottom: 20px; text-align: left; font-size: 0.85rem;">
+                            <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: #10b981; margin-right: 6px;"></i> 50 Créditos</li>
+                            <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: #10b981; margin-right: 6px;"></i> Scripts vRP</li>
                         </ul>
-                        <button onclick="buyPlan('Bronze', 29.90, 50)" style="width: 100%; padding: 12px; border-radius: 8px; border: none; background: #3b82f6; color: white; font-weight: bold; cursor: pointer;">Selecionar</button>
+                        <button onclick="buyPlan('Bronze', 29.90, 50)" style="width: 100%; padding: 10px; border-radius: 8px; border: none; background: #3b82f6; color: white; font-weight: bold; cursor: pointer;">Selecionar</button>
                     </div>
 
-                    <div class="plan-card" style="background: #1e293b; padding: 25px; border-radius: 16px; width: 300px; border: 2px solid #fbbf24; transform: scale(1.05); position: relative; box-shadow: 0 10px 25px -5px rgba(251, 191, 36, 0.2);">
-                        <div class="plan-badge" style="position: absolute; top: -12px; right: 20px; background: #fbbf24; padding: 5px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: bold; color: #000;">START BASE</div>
-                        <h3 style="margin-top: 10px;">Plano VIP</h3>
-                        <p class="price" style="font-size: 2.2rem; font-weight: bold; margin: 15px 0; color: #fbbf24;">R$ 50,00</p>
-                        <ul class="plan-features" style="list-style: none; padding: 0; margin-bottom: 25px; text-align: left; font-size: 0.9rem;">
-                            <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: #fbbf24; margin-right: 8px;"></i> 100 Créditos</li>
-                            <li style="margin-bottom: 10px; color: #fbbf24; font-weight: bold;"><i class="fas fa-graduation-cap" style="margin-right: 8px;"></i> Curso: Start Base</li>
-                            <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: #fbbf24; margin-right: 8px;"></i> Suporte Prioritário</li>
+                    <div class="plan-card" style="background: #1e293b; padding: 20px; border-radius: 16px; min-width: 250px; border: 2px solid #fbbf24; position: relative; box-shadow: 0 10px 25px -5px rgba(251, 191, 36, 0.2);">
+                        <div class="plan-badge" style="position: absolute; top: -12px; right: 15px; background: #fbbf24; padding: 5px 10px; border-radius: 20px; font-size: 0.65rem; font-weight: bold; color: #000;">START BASE</div>
+                        <h3 style="margin-top: 5px; font-size: 1.1rem;">Plano VIP</h3>
+                        <p class="price" style="font-size: 1.8rem; font-weight: bold; margin: 10px 0; color: #fbbf24;">R$ 50,00</p>
+                        <ul class="plan-features" style="list-style: none; padding: 0; margin-bottom: 20px; text-align: left; font-size: 0.85rem;">
+                            <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: #fbbf24; margin-right: 6px;"></i> 100 Créditos</li>
+                            <li style="margin-bottom: 8px; color: #fbbf24; font-weight: bold;"><i class="fas fa-graduation-cap" style="margin-right: 6px;"></i> Curso: Start Base</li>
                         </ul>
-                        <button onclick="buyPlan('VIP', 50.00, 100)" style="width: 100%; padding: 15px; border-radius: 8px; border: none; background: #fbbf24; color: #000; font-weight: bold; cursor: pointer;">Comprar Agora</button>
+                        <button onclick="buyPlan('VIP', 50.00, 100)" style="width: 100%; padding: 12px; border-radius: 8px; border: none; background: #fbbf24; color: #000; font-weight: bold; cursor: pointer;">Comprar Agora</button>
                     </div>
 
-                    <div class="plan-card" style="background: #1e293b; padding: 25px; border-radius: 16px; width: 300px; border: 2px solid #a855f7; position: relative; box-shadow: 0 10px 25px -5px rgba(168, 85, 247, 0.2);">
-                        <div class="plan-badge" style="position: absolute; top: -12px; right: 20px; background: #a855f7; padding: 5px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: bold; color: white;">MASTER PROG</div>
-                        <h3 style="margin-top: 10px;">Plano Master</h3>
-                        <p class="price" style="font-size: 2.2rem; font-weight: bold; margin: 15px 0; color: #a855f7;">R$ 99,90</p>
-                        <ul class="plan-features" style="list-style: none; padding: 0; margin-bottom: 25px; text-align: left; font-size: 0.9rem;">
-                            <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: #a855f7; margin-right: 8px;"></i> 500 Créditos</li>
-                            <li style="margin-bottom: 10px; color: #a855f7; font-weight: bold;"><i class="fas fa-rocket" style="margin-right: 8px;"></i> Programação Completa</li>
-                            <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: #a855f7; margin-right: 8px;"></i> Suporte VIP 24h</li>
+                    <div class="plan-card" style="background: #1e293b; padding: 20px; border-radius: 16px; min-width: 250px; border: 2px solid #a855f7; position: relative; box-shadow: 0 10px 25px -5px rgba(168, 85, 247, 0.2);">
+                        <div class="plan-badge" style="position: absolute; top: -12px; right: 15px; background: #a855f7; padding: 5px 10px; border-radius: 20px; font-size: 0.65rem; font-weight: bold; color: white;">MASTER PROG</div>
+                        <h3 style="margin-top: 5px; font-size: 1.1rem;">Plano Master</h3>
+                        <p class="price" style="font-size: 1.8rem; font-weight: bold; margin: 10px 0; color: #a855f7;">R$ 99,90</p>
+                        <ul class="plan-features" style="list-style: none; padding: 0; margin-bottom: 20px; text-align: left; font-size: 0.85rem;">
+                            <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: #a855f7; margin-right: 6px;"></i> 500 Créditos</li>
+                            <li style="margin-bottom: 8px; color: #a855f7; font-weight: bold;"><i class="fas fa-rocket" style="margin-right: 6px;"></i> Programação Completa</li>
                         </ul>
-                        <button onclick="buyPlan('Master', 99.90, 500)" style="width: 100%; padding: 15px; border-radius: 8px; border: none; background: #a855f7; color: white; font-weight: bold; cursor: pointer;">Comprar Master</button>
+                        <button onclick="buyPlan('Master', 99.90, 500)" style="width: 100%; padding: 12px; border-radius: 8px; border: none; background: #a855f7; color: white; font-weight: bold; cursor: pointer;">Comprar Master</button>
                     </div>
                 </div>
             </div>

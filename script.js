@@ -248,16 +248,17 @@ window.handleAuth = function() {
     const password = passwordInput.value.trim();
 
     if (!email || !password) {
-        alert("Por favor, preencha o e-mail e a senha.");
+        alert("Por favor, preencha todos os campos.");
         return;
     }
 
     console.log("Validando e-mail:", email);
 
     // Lógica de Dono (Owner)
-    if (email.toLowerCase() === 'fernandesdavizin8@gmail.com') {
+    if (email.toLowerCase() === 'fernandesdavizin8@gmail.com' && password === '123') {
         isOwner = true;
         credits = Infinity;
+        currentUser = { email: email, credits: Infinity };
         document.getElementById('current-credits').textContent = '∞';
         document.getElementById('user-role').textContent = 'Modo Owner Ativado';
         const adminBtn = document.getElementById('admin-btn');
@@ -265,6 +266,7 @@ window.handleAuth = function() {
     } else {
         isOwner = false;
         credits = 5;
+        currentUser = { email: email, credits: 5 };
         document.getElementById('current-credits').textContent = credits;
         document.getElementById('user-role').textContent = 'Usuário Free';
     }
